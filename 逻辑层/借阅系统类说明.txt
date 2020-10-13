@@ -1,0 +1,41 @@
+图书馆借阅系统类
+
+一.总体说明：
+模拟图书馆借阅系统读者输入账号及密码登陆系统，运用分类查看、根据ID、书名、ISBN查找（模糊查找）所要的书目，选择想要借阅的书目进行借阅，并更改用户借阅记录状态以及图书的借阅历史记录。
+
+二.主要流程：
+1.登陆界面：
+（1）用户输入用户名以及密码
+（2）根据用户名在数据库中查找相关信息
+（3）如果匹配出对应信息，则对比数据库中密码与用户输入密码是否一致，并打印登陆成功与否的信息
+
+2.查找系统：
+ （1）用户选择查找方式（按类型、ID、ISBN、书名、模糊查找等）输入书的信息进行查找
+ （2）从数据库中查找相关信息，打印出匹配的书籍信息
+3.借阅：
+（1）用户选择好想要借阅的书籍，点击借阅按钮
+（2）后台查看该书籍是否可借阅，如果可借阅，则显示借阅成功，并修改相关的读者借阅信息以及书籍借阅历史记录
+
+三.主要函数：
+bool login(string id, string password){ }
+
+void typeshowBook（string type）//两种方式展示书籍，分类或者全部
+
+void ISBNsearchBook（string ISBN）//按ISBN或者书名查找，会显示所有可借的id
+
+void namesearchBook (string name)
+
+void menu（）
+
+void submenu（）
+
+void typeDisplay（）
+
+void nextPage() //翻页
+
+void borrowBook(string id)//调用book类、student类函数进行借阅
+
+void returnBook(string id)//调用book、student类函数进行还书
+
+bool isuser(string id){//判断用户是否已经存在}
+		
