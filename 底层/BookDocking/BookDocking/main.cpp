@@ -7,7 +7,7 @@ int main()
 	string value;
 	string ISBN, name, author, type, borrowtime, returntime, histroy, onsheelf, isovertime;
 	borrowtime = returntime = "00-00-00";
-	histroy = " ";
+	histroy = "历史记录";
 	onsheelf = isovertime = "1";
 	while (true)
 	{
@@ -27,7 +27,15 @@ int main()
 				cin >> id;
 				value = docking.booksearch(id);
 				//把得到的包含所有信息的字符串分发给各个字段
-				docking.negativedataformatting(value, ISBN, name, author, type, borrowtime, returntime, histroy, onsheelf, isovertime);
+				ISBN = value.substr(0, 6);
+				name = value.substr(6, 8);
+				author = value.substr(14, 4);
+				type = value.substr(18, 4);
+				borrowtime = value.substr(22, 8);
+				returntime = value.substr(30, 8);
+				histroy = value.substr(38, 20);
+				onsheelf = value.substr(58, 1);
+				isovertime = value.substr(59, 1);
 				cout << "id: "<< id <<" ISBN: "<< ISBN <<" name: "<< name <<" author: "<< author <<" type: "<< type << endl;
 				cout << "borrowtime: "<< borrowtime << endl;
 				cout << "returntime: " << returntime << endl;
@@ -38,7 +46,12 @@ int main()
 				cout << "Please input id ISBN name author type:";
 				cin >> id >> ISBN >> name >> author >> type;
 				//把输入的信息转换成规定的大小 
-				docking.formatting(ISBN, name, author, type, histroy);
+
+				ISBN = dataformatting(6, ISBN);
+				name = dataformatting(8, name);
+				author = dataformatting(4, author);
+				type = dataformatting(4, type);
+				histroy = dataformatting(20, histroy);
 				if (docking.bookadd(id, ISBN, name, author, type, borrowtime, returntime, histroy, onsheelf, isovertime))
 					cout << "success" << endl;
 				else
@@ -75,7 +88,7 @@ int main()
 						cout << "Please input id ISBN:";
 						cin >> id;
 						cin >> ISBN;
-						ISBN = docking.dataformatting(6, ISBN);
+						ISBN = dataformatting(6, ISBN);
 						if (docking.bookmodifyISBN(id, ISBN))
 							cout << "success" << endl;
 						else
@@ -85,7 +98,7 @@ int main()
 						cout << "Please input id name:";
 						cin >> id;
 						cin >> name;
-						name = docking.dataformatting(8, name);
+						name = dataformatting(8, name);
 						if (docking.bookmodifyname(id, name))
 							cout << "success" << endl;
 						else
@@ -95,7 +108,7 @@ int main()
 						cout << "Please input id author:";
 						cin >> id;
 						cin >> author;
-						author = docking.dataformatting(4, author);
+						author = dataformatting(4, author);
 						if (docking.bookmodifyauthor(id, author))
 							cout << "success" << endl;
 						else
@@ -105,7 +118,7 @@ int main()
 						cout << "Please input id type:";
 						cin >> id;
 						cin >> type;
-						type = docking.dataformatting(4, type);
+						type = dataformatting(4, type);
 						if (docking.bookmodifytype(id, type))
 							cout << "success" << endl;
 						else
@@ -115,7 +128,7 @@ int main()
 						cout << "Please input id borrowtime:";
 						cin >> id;
 						cin >> borrowtime;
-						borrowtime = docking.dataformatting(8, borrowtime);
+						borrowtime = dataformatting(8, borrowtime);
 						if (docking.bookmodifyborrowtime(id, borrowtime))
 							cout << "success" << endl;
 						else
@@ -125,7 +138,7 @@ int main()
 						cout << "Please input id returntime:";
 						cin >> id;
 						cin >> returntime;
-						returntime = docking.dataformatting(8, returntime);
+						returntime = dataformatting(8, returntime);
 						if (docking.bookmodifyreturntime(id, returntime))
 							cout << "success" << endl;
 						else
@@ -135,7 +148,7 @@ int main()
 						cout << "Please input id onsheelf:";
 						cin >> id;
 						cin >> onsheelf;
-						onsheelf = docking.dataformatting(8, onsheelf);
+						onsheelf = dataformatting(8, onsheelf);
 						if (docking.bookmodifyonsheelf(id, onsheelf))
 							cout << "success" << endl;
 						else
@@ -145,7 +158,7 @@ int main()
 						cout << "Please input id isovertime:";
 						cin >> id;
 						cin >> isovertime;
-						isovertime = docking.dataformatting(8, isovertime);
+						isovertime = dataformatting(8, isovertime);
 						if (docking.bookmodifyisovertime(id, isovertime))
 							cout << "success" << endl;
 						else

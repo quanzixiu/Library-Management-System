@@ -7,10 +7,7 @@ using namespace std;
 class bookdocking {
 public:
 	bookdocking();
-	string dataformatting(int n, string data);//把输入的信息转换成规定的大小的工具函数
-	void formatting(string ISBN, string name, string author, string type, string histroy);//把输入的信息转换成规定的大小
-	//把得到的包含所有信息的字符串分发给各个字段
-	void negativedataformatting(string value, string ISBN, string name, string author, string type, string borrowtime, string returntime, string histroy, string onsheelf, string isovertime);
+
 	bool bookadd(int id, string ISBN, string name, string author, string type, string borrowtime, string returntime, string histroy, string onsheelf, string isovertime);
 	bool bookdelete(int id);
 	string booksearch(int id);
@@ -30,3 +27,9 @@ private:
 	int id;
 	string value;
 };
+
+/*以下工具函数供你们使用*/
+
+string dataformatting(int n, string data);////字段如果没有达到规定大小则 将空余的地方填充空格 
+
+

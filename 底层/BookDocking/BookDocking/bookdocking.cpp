@@ -2,31 +2,7 @@
 
 bookdocking::bookdocking(){}
 
-string bookdocking::dataformatting(int n, string data)
-{
-	data.append(n - data.size(), ' ');
-	return data;
-}
 
-void bookdocking::formatting(string ISBN, string name, string author, string type, string histroy) {
-	ISBN = dataformatting(6, ISBN);
-	name = dataformatting(8, name);
-	author = dataformatting(4, author);
-	type = dataformatting(4, type);
-	histroy = dataformatting(20, histroy);
-}
-
-void bookdocking::negativedataformatting(string value, string ISBN, string name, string author, string type, string borrowtime, string returntime, string histroy, string onsheelf, string isovertime) {
-	ISBN = value.substr(0, 6);
-	name = value.substr(6, 8);
-	author = value.substr(14, 4);
-	type = value.substr(18, 4);
-	borrowtime = value.substr(22, 8);
-	returntime = value.substr(30, 8);
-	histroy = value.substr(38, 20);
-	onsheelf = value.substr(58, 1);
-	isovertime = value.substr(59, 1);
-}
 
 bool bookdocking::bookadd(int id,string ISBN, string name, string author, string type, string borrowtime, string returntime, string histroy, string onsheelf, string isovertime)
 {
@@ -153,3 +129,11 @@ bool bookdocking::bookmodifyonsheelf(int id, string onsheelf) {
 	else
 		return false;
 }
+
+//字段如果没有达到规定大小则 将空余的地方填充空格
+string dataformatting(int n, string data)
+{
+	data.append(n - data.size(), ' ');
+	return data;
+}
+
