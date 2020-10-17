@@ -7,7 +7,10 @@ using namespace std;
 class bookdocking {
 public:
 	bookdocking();
-	string bookdocking::dataformatting(int n, string isbn);
+	string dataformatting(int n, string data);//把输入的信息转换成规定的大小的工具函数
+	void formatting(string ISBN, string name, string author, string type, string histroy);//把输入的信息转换成规定的大小
+	//把得到的包含所有信息的字符串分发给各个字段
+	void negativedataformatting(string value, string ISBN, string name, string author, string type, string borrowtime, string returntime, string histroy, string onsheelf, string isovertime);
 	bool bookadd(int id, string ISBN, string name, string author, string type, string borrowtime, string returntime, string histroy, string onsheelf, string isovertime);
 	bool bookdelete(int id);
 	string booksearch(int id);

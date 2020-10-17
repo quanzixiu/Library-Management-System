@@ -25,17 +25,20 @@ int main()
 			case 0:
 				cout << "Please input the id:";
 				cin >> id;
-				cout << docking.booksearch(id) << endl;
+				value = docking.booksearch(id);
+				//把得到的包含所有信息的字符串分发给各个字段
+				docking.negativedataformatting(value, ISBN, name, author, type, borrowtime, returntime, histroy, onsheelf, isovertime);
+				cout << "id: "<< id <<" ISBN: "<< ISBN <<" name: "<< name <<" author: "<< author <<" type: "<< type << endl;
+				cout << "borrowtime: "<< borrowtime << endl;
+				cout << "returntime: " << returntime << endl;
+				cout << "histroy: " << endl << histroy << endl;
+				cout << "onsheelf: "<< onsheelf <<" isovertime: " << isovertime << endl;
 				break;
 			case 1:
 				cout << "Please input id ISBN name author type:";
 				cin >> id >> ISBN >> name >> author >> type;
 				//把输入的信息转换成规定的大小 
-				ISBN = docking.dataformatting(6,ISBN);
-				name = docking.dataformatting(8, name);
-				author = docking.dataformatting(4, author);
-				type = docking.dataformatting(4, type);
-				histroy = docking.dataformatting(20, histroy);
+				docking.formatting(ISBN, name, author, type, histroy);
 				if (docking.bookadd(id, ISBN, name, author, type, borrowtime, returntime, histroy, onsheelf, isovertime))
 					cout << "success" << endl;
 				else
