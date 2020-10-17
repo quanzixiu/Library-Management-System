@@ -142,6 +142,8 @@ isbn长度为6，name长度为8，author长度为4，type长度为4，borrowtime
 
 输入的信息不足长度的 用空格填充
 
+**输入到modify函数和add函数中的参数必须是经过格式化（dataformating）的参数**
+
 1.
 
 逻辑层函数名称：删除图书 deletebook()
