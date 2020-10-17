@@ -30,6 +30,7 @@ int main()
 			case 1:
 				cout << "Please input id ISBN name author type:";
 				cin >> id >> ISBN >> name >> author >> type;
+				//把输入的信息转换成规定的大小 
 				ISBN = docking.dataformatting(6,ISBN);
 				name = docking.dataformatting(8, name);
 				author = docking.dataformatting(4, author);

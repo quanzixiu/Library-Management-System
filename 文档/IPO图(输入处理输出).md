@@ -134,13 +134,21 @@
 
 ## 图书管理模块
 
+int id，string value 
+
+value：
+
+isbn长度为6，name长度为8，author长度为4，type长度为4，borrowtime格式yy-mm-dd，returntime同，长度各为8。history长度为20，onshelf、isovertime长度为1，取值为0或1。
+
+输入的信息不足长度的 用空格填充
+
 1.
 
 逻辑层函数名称：删除图书 deletebook()
 
 底层函数输入参数：bookid
 
-调用底层函数：bookdelete(string id)
+调用底层函数：bool bookdelete(int id)
 
 底层函数返回值：bool
 
@@ -148,9 +156,19 @@
 
 逻辑层函数名称：修改图书 modifybook()
 
-底层函数输入参数：bookid 
+底层函数输入参数：bookid  要修改的信息
 
-调用底层函数：bookmodify(string id)
+调用底层函数：
+
+-   bool bookmodifyISBN(int id, string ISBN);
+-   bool bookmodifyname(int id, string name);
+-   bool bookmodifyauthor(int id, string author);
+-   bool bookmodifytype(int id, string type);
+-   bool bookmodifyborrowtime(int id, string borrowtime);
+-   bool bookmodifyreturntime(int id, string returntime);
+-   bool bookmodifyhistroy(int id, string history);
+-   bool bookmodifyonsheelf(int id, string sheelf);
+-   bool bookmodifyisovertime(int id, string isorvertime);
 
 底层函数返回值：bool
 
@@ -160,19 +178,29 @@
 
 底层函数输入参数：bookid
 
-调用底层函数：bookadd(string ISBN,string name,string author,string type,string id,string borrowtime,string returntime,string history, bool onsheelf,bool isovertime;)
+调用底层函数：bool bookadd(string ISBN,string name,string author,string type,string borrowtime,string returntime,string history, bool onsheelf,bool isovertime;)
 
-底层函数返回值：bool
+底层函数返回值：bool、
 
 4.
 
+逻辑层函数名称：查询图书 
+
+底层函数输入参数：bookid 
+
+调用底层函数：string booksearch(int id);
+
+底层函数返回值：包含图书信息的字符串
+
+5.
+
 逻辑层函数名称：该图书是否已经存在 existbook()
 
-底层函数输入参数：bookid
+底层函数输入参数：bookid 
 
-调用底层函数：booksearchid(string id)
+调用底层函数：bool bookexit(string id)
 
-底层函数返回值：返回图书对象信息字符串
+底层函数返回值：bool
 
 
 
