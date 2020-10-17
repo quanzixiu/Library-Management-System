@@ -11,18 +11,18 @@ int main()
 	onsheelf = isovertime = "1";
 	while (true)
 	{
-		cout << "0.search" << endl;
-		cout << "1.add" << endl;
-		cout << "2.delete" << endl;
-		cout << "3.modify" << endl;
-		cout << "4.quit" << endl;
+		cout << "1.search" << endl;
+		cout << "2.add" << endl;
+		cout << "3.delete" << endl;
+		cout << "4.modify" << endl;
+		cout << "0.quit" << endl;
 		cout << "Please input a number:";
 		cin >> op;
-		if (op == 4)
+		if (op == 0)
 			break;
 		switch (op)
 		{
-			case 0:
+			case 1:
 				cout << "Please input the id:";
 				cin >> id;
 				value = docking.booksearch(id);
@@ -42,7 +42,7 @@ int main()
 				cout << "histroy: " << endl << histroy << endl;
 				cout << "onsheelf: "<< onsheelf <<" isovertime: " << isovertime << endl;
 				break;
-			case 1:
+			case 2:
 				cout << "Please input id ISBN name author type:";
 				cin >> id >> ISBN >> name >> author >> type;
 				//把输入的信息转换成规定的大小 
@@ -58,7 +58,7 @@ int main()
 					cout << "failure" << endl;
 
 				break;
-			case 2:
+			case 3:
 				cout << "Please input the id:";
 				cin >> id;
 				if (docking.bookdelete(id))
@@ -66,7 +66,7 @@ int main()
 				else
 					cout << "failure" << endl;
 				break;
-			case 3:
+			case 4:
 				while (true)
 				{
 					cout << "1.ISBN" << endl;
