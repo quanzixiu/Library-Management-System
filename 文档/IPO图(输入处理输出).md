@@ -84,9 +84,9 @@
 
 底层函数输入参数：userid
 
-调用底层函数：usersearchid(string id)
+调用底层函数：bool userexist(int id)
 
-底层函数返回值：返回用户对象信息字符串
+底层函数返回值：bool
 
 3.
 
@@ -94,31 +94,25 @@
 
 底层函数输入参数 ：userid
 
-调用底层函数：userdelete(string id)
+调用底层函数：userdelete(int id)
 
 底层函数返回值：bool
 
 4.
 
-逻辑层函数名称：修改用户借阅信息 modifyuserdata()
+逻辑层函数名称：修改图书 modifyuse()
 
-底层函数输入参数：userid
+底层函数输入参数：userid  要修改的信息
 
-调用底层函数：userstatessearch(string id)
+调用底层函数：
 
-底层函数返回值：bookid
-
-底层函数输入参数：bookid
-
-调用底层函数：booksearchid(string id)
-
-底层函数返回值：返回书籍对象信息字符串
-
-调用底层函数：bookmodify(string id) //修改book onsheelf
+-   bool usermodifyname(int id, string name);
+-   bool usermodifycollege(int id, string college);
+-   bool usermodifymajor(int id, string major);
+-   bool usermodifypassword(int id, string password);
+-   bool usermodifyremail(int id, string email);
 
 底层函数返回值：bool
-
-
 
 5.
 
@@ -182,7 +176,7 @@ isbn长度为6，name长度为8，author长度为4，type长度为4，borrowtime
 
 调用底层函数：bool bookadd(string ISBN,string name,string author,string type,string borrowtime,string returntime,string history, bool onsheelf,bool isovertime;)
 
-底层函数返回值：bool、
+底层函数返回值：bool
 
 4.
 
@@ -200,7 +194,7 @@ isbn长度为6，name长度为8，author长度为4，type长度为4，borrowtime
 
 底层函数输入参数：bookid 
 
-调用底层函数：bool bookexit(string id)
+调用底层函数：bool bookexist(string id)
 
 底层函数返回值：bool
 
