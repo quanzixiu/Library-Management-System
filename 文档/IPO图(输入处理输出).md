@@ -200,7 +200,7 @@ isbn长度为6，name长度为8，author长度为4，type长度为4，borrowtime
 
 底层函数输入参数：bookid 
 
-调用底层函数：bool bookexit(string id)
+调用底层函数：bool bookexist(string id)
 
 底层函数返回值：bool
 
