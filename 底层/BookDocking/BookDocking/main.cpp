@@ -7,8 +7,9 @@ int main()
 	string value;
 	string ISBN, name, author, type, borrowtime, returntime, histroy, onsheelf, isovertime;
 	borrowtime = returntime = "00-00-00";
-	histroy = "历史记录";
-	onsheelf = isovertime = "1";
+	histroy = "17040031023qzx";
+	onsheelf = "1"; 
+	isovertime = "0";
 	while (true)
 	{
 		cout << "1.search" << endl;
@@ -148,7 +149,7 @@ int main()
 						cout << "Please input id onsheelf:";
 						cin >> id;
 						cin >> onsheelf;
-						onsheelf = dataformatting(8, onsheelf);
+						onsheelf = dataformatting(1, onsheelf);
 						if (docking.bookmodifyonsheelf(id, onsheelf))
 							cout << "success" << endl;
 						else
@@ -158,7 +159,7 @@ int main()
 						cout << "Please input id isovertime:";
 						cin >> id;
 						cin >> isovertime;
-						isovertime = dataformatting(8, isovertime);
+						isovertime = dataformatting(1, isovertime);
 						if (docking.bookmodifyisovertime(id, isovertime))
 							cout << "success" << endl;
 						else
