@@ -1,0 +1,8 @@
+D:\Github\Library-Management-System\底层\BookDocking\BookDocking\Debug\BookDocking.exe
+D:\Github\Library-Management-System\底层\BookDocking\BookDocking\Debug\BookDocking.pdb
+D:\Github\Library-Management-System\底层\BookDocking\Debug\BookDocking.pdb
+C:\Users\qzx\Desktop\新建文件夹\BookDocking\Debug\BookDocking.pdb
+C:\Users\qzx\Desktop\新建文件夹\BookDocking\BookDocking\Debug\BookDocking.exe
+C:\Users\qzx\Desktop\新建文件夹\BookDocking\BookDocking\Debug\BookDocking.pdb
+C:\Users\qzx\Desktop\新建文件夹\UserDocking\UserDocking\Debug\UserDocking.exe
+C:\Users\qzx\Desktop\新建文件夹\UserDocking\UserDocking\Debug\UserDocking.pdb

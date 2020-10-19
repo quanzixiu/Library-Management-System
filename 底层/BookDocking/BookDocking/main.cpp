@@ -5,11 +5,10 @@ int main()
 	bookdocking docking;
 	int op,op1,id;
 	string value;
-	string ISBN, name, author, type, borrowtime, returntime, histroy, onsheelf, isovertime;
+	string ISBN, name, author, type, borrowtime, returntime, history, onsheelf, isovertime;
 	borrowtime = returntime = "00-00-00";
-	histroy = "17040031023qzx";
-	onsheelf = "1"; 
-	isovertime = "0";
+	history = "aaaaaaaaaaaaaa";
+	onsheelf = isovertime = "1";
 	while (true)
 	{
 		cout << "1.search" << endl;
@@ -26,22 +25,29 @@ int main()
 			case 1:
 				cout << "Please input the id:";
 				cin >> id;
-				value = docking.booksearch(id);
-				//把得到的包含所有信息的字符串分发给各个字段
-				ISBN = value.substr(0, 6);
-				name = value.substr(6, 8);
-				author = value.substr(14, 4);
-				type = value.substr(18, 4);
-				borrowtime = value.substr(22, 8);
-				returntime = value.substr(30, 8);
-				histroy = value.substr(38, 20);
-				onsheelf = value.substr(58, 1);
-				isovertime = value.substr(59, 1);
-				cout << "id: "<< id <<" ISBN: "<< ISBN <<" name: "<< name <<" author: "<< author <<" type: "<< type << endl;
-				cout << "borrowtime: "<< borrowtime << endl;
-				cout << "returntime: " << returntime << endl;
-				cout << "histroy: " << endl << histroy << endl;
-				cout << "onsheelf: "<< onsheelf <<" isovertime: " << isovertime << endl;
+				if(docking.bookexist(id))//每次查询前都要判断
+				{
+					value = docking.booksearch(id);
+					//把得到的包含所有信息的字符串分发给各个字段
+					ISBN = value.substr(0, 6);
+					name = value.substr(6, 8);
+					author = value.substr(14, 4);
+					type = value.substr(18, 4);
+					borrowtime = value.substr(22, 8);
+					returntime = value.substr(30, 8);
+					history = value.substr(38, 40);
+					onsheelf = value.substr(78, 1);
+					isovertime = value.substr(79, 1);
+					cout << "id: " << id << " ISBN: " << ISBN << " name: " << name << " author: " << author << " type: " << type << endl;
+					cout << "borrowtime: " << borrowtime << endl;
+					cout << "returntime: " << returntime << endl;
+					cout << "histroy: " << endl << history << endl;
+					cout << "onsheelf: " << onsheelf << " isovertime: " << isovertime << endl;
+				}
+				else
+				{
+					cout << "failure" << endl;
+				}
 				break;
 			case 2:
 				cout << "Please input id ISBN name author type:";
@@ -52,8 +58,8 @@ int main()
 				name = dataformatting(8, name);
 				author = dataformatting(4, author);
 				type = dataformatting(4, type);
-				histroy = dataformatting(20, histroy);
-				if (docking.bookadd(id, ISBN, name, author, type, borrowtime, returntime, histroy, onsheelf, isovertime))
+				history = dataformatting(40, history);
+				if (docking.bookadd(id, ISBN, name, author, type, borrowtime, returntime, history, onsheelf, isovertime))
 					cout << "success" << endl;
 				else
 					cout << "failure" << endl;

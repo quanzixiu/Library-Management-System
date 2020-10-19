@@ -18,8 +18,8 @@ public:
 	bool bookmodifytype(int id, string type);
 	bool bookmodifyborrowtime(int id, string borrowtime);
 	bool bookmodifyreturntime(int id, string returntime);
-	bool bookmodifyhistroy(int id, string history);
-	bool bookmodifyonsheelf(int id, string sheelf);
+	bool bookmodifyhistory(int id, string history);
+	bool bookmodifyonsheelf(int id, string onsheelf);
 	bool bookmodifyisovertime(int id, string isorvertime);
 
 private:
