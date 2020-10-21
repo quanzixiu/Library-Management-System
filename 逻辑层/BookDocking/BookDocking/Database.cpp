@@ -27,10 +27,10 @@ Database::Database()
 
 void Database::dataFile_find(const int dataAddress, string &value)
 {
-	char tmp[60];
+	char tmp[80];
 	dataFile.clear();
 	dataFile.seekg(dataAddress, ios::beg);
-	dataFile.read((char *)tmp, 60);
+	dataFile.read((char *)tmp, 80);
 	value = tmp;
 	logFile << "[dataFile_find] dataAddress:" << dataAddress << " value:" << value << " tmp:" << tmp << endl;
 }
@@ -48,7 +48,7 @@ int Database::dataFile_add(const string &value)
 	dataFile.write(value.c_str(), value.size() + 1);
 	dataFile.seekg(dataAddress, ios::beg);
 	if (next == 0)
-		next = dataAddress + 60;
+		next = dataAddress + 80;
 	dataFile.seekp(0, ios::beg);
 	dataFile.write(reinterpret_cast<char *>(&next), sizeof(int));
 	logFile << "[dataFile_add] value:" << value << " dataAddress:" << dataAddress << " next:" << next << endl;
@@ -650,16 +650,16 @@ void Database::indexFile_deleteAndUnderflow(const int indexAddress, const int po
 			int parent = 0, parentPosition, parentSize;
 			indexFile.seekg(indexAddress);
 			indexFile.read((char *)&parent, sizeof(int));
-			if (parent == 0)//当前节点为根节点
+			if (parent == 0)//锟斤拷前锟节碉拷为锟斤拷锟节碉拷
 			{
 				if (size == 1)
 				{
 					int dataAddress;
 					indexFile.seekg(indexAddress + 12 + 4);
 					indexFile.read((char *)&dataAddress, sizeof(int));
-					if (dataAddress > 0)//不是叶节点
+					if (dataAddress > 0)//锟斤拷锟斤拷叶锟节碉拷
 					{
-						//下溢一层
+						//锟斤拷锟斤拷一锟斤拷
 						int firstEmpty;
 						indexFile.seekg(4);
 						indexFile.read((char *)&firstEmpty, sizeof(int));

@@ -1,0 +1,40 @@
+
+SELECT key:1
+[indexFile_find] middle:1 tmp:1
+[indexFile_find] key:1 address:8 begin:1 end:1 middle:1 tmp:1 size:1
+[indexFile_find] last:1
+SELECT find result:1
+[dataFile_find] dataAddress:4 value:23      33  44  55              66                      ллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллВ+R>╡ё tmp:23      33  44  55              66                      ллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллВ+R>╡ё
+SELECT key:1 indexAddress:8 pos:1 dataAddress:4 value:23      33  44  55              66                      ллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллВ+R>╡ё
+
+UPDATE key:1 value:23      33  44  55              66                      ллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллВ+R>╡ё
+
+SELECT key:1
+
+UPDATE key:1 value:23      12  44  55              66                      ллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллллВ+R>╡ё
+
+SELECT key:2
+[indexFile_find] middle:1 tmp:1
+[indexFile_find] key:2 address:8 begin:1 end:1 middle:1 tmp:1 size:1
+[indexFile_find] last:1
+SELECT find result:4
+
+INSERT key:2 value:2       2   2   2               2                       
+[indexFile_find] middle:1 tmp:1
+[indexFile_find] key:2 address:8 begin:1 end:1 middle:1 tmp:1 size:1
+[indexFile_find] last:1
+INSERT find result:4
+[dataFile_add] value:2       2   2   2               2                        dataAddress:60 next:116
+INSERT key:2 dataAddress:-60 indexAddress:8 pos:1 size:1
+indexFile_addAndOverflow key:2 dataAddress:-60 indexAddress:8 pos:1 size:1
+[indexFile_add] key:2 dataAddress:-60 indexAddress:8 pos:1 size:1
+
+SELECT key:12
+[indexFile_find] middle:1 tmp:1
+[indexFile_find] key:12 address:8 begin:1 end:2 middle:1 tmp:1 size:2
+[indexFile_find] last:2
+SELECT find result:4
+
+SELECT key:2
+
+UPDATE key:2 value:2       12  2   2               2                       
