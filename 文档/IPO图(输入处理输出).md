@@ -117,10 +117,13 @@ bool usadd(int userid,string bookid);//如果不是第一次借的话，往这�
 
 bool bookmodifyhistroy(int id, string history);//在书的history中添加这个人的id  此时人的id必须是8位  以后我们创建一百个同学的时候会把所有人的id都取8位，但是现在测试时建议在创建用户时就把人的id设为8位数字
 
-往history中添加userid时，给出一个参考代码
+往history中添加userid时，给出一个参考算法
 
 ```
-代码明天给今天熬不动了  悟性强的话参考以下userstates 的 add函数  原理和应用场景差不多
+去掉格式化所加的空格，如果userid都是8位的则不用
+history=hsitory+(经过string类型转换的)bookid
+//string类型的变量可以直接+   代表字符串连接
+更新history
 ```
 
 
