@@ -1,5 +1,1 @@
-﻿  bookdocking.cpp
-  main.cpp
-  正在生成代码...
-D:\Github\Library-Management-System\底层\BookDocking\BookDocking\bookdocking.cpp(26): warning C4715: “bookdocking::booksearch”: 不是所有的控件路径都返回值
-  database.vcxproj -> D:\Github\Library-Management-System\底层\BookDocking\Debug\BookDocking.exe
+﻿  database.vcxproj -> C:\Users\qzx\Desktop\新建文件夹\BookDocking\Debug\BookDocking.exe

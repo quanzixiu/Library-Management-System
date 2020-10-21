@@ -27,12 +27,6 @@
     <ClCompile Include="bookdocking.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="creatbook.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="existbook.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Database.h">
@@ -42,9 +36,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="bookdocking.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="supervisor.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

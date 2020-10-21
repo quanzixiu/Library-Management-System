@@ -97,9 +97,9 @@ bool bookdocking::bookmodifyreturntime(int id, string returntime) {
 	else
 		return false;
 }
-bool bookdocking::bookmodifyhistroy(int id, string histroy) {
+bool bookdocking::bookmodifyhistory(int id, string history) {
 	if (database.select(id, value)){
-		value.replace(38, 20, histroy);
+		value.replace(38, 40, history);
 		if (database.update(id, value))
 			return true;
 		else
@@ -110,7 +110,7 @@ bool bookdocking::bookmodifyhistroy(int id, string histroy) {
 }
 bool bookdocking::bookmodifyonsheelf(int id, string onsheelf) {
 	if (database.select(id, value)){
-		value.replace(58, 1, onsheelf);
+		value.replace(78, 1, onsheelf);
 		if (database.update(id, value))
 			return true;
 		else
@@ -120,7 +120,7 @@ bool bookdocking::bookmodifyonsheelf(int id, string onsheelf) {
 		return false;
 }bool bookdocking::bookmodifyisovertime(int id, string isovertime) {
 	if (database.select(id, value)){
-		value.replace(59, 1, isovertime);
+		value.replace(79, 1, isovertime);
 		if (database.update(id, value))
 			return true;
 		else
@@ -130,7 +130,7 @@ bool bookdocking::bookmodifyonsheelf(int id, string onsheelf) {
 		return false;
 }
 
-//×Ö¶ÎÈç¹ûÃ»ÓÐ´ïµ½¹æ¶¨´óÐ¡Ôò ½«¿ÕÓàµÄµØ·½Ìî³ä¿Õ¸ñ
+//ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð´ïµ½ï¿½æ¶¨ï¿½ï¿½Ð¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄµØ·ï¿½ï¿½ï¿½ï¿½Õ¸ï¿½
 string dataformatting(int n, string data)
 {
 	data.append(n - data.size(), ' ');
