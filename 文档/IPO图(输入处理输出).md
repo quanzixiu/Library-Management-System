@@ -120,9 +120,13 @@ bool bookmodifyhistroy(int id, string history);//在书的history中添加这个
 往history中添加userid时，给出一个参考算法
 
 ```
-去掉格式化所加的空格，如果userid都是8位的则不用
+去掉history末尾格式化所加的空格  (规定userid应该都是8位的)
+
 history=hsitory+(经过string类型转换的)bookid
 //string类型的变量可以直接+   代表字符串连接
+
+填充空格使其满足40位
+
 更新history
 ```
 
