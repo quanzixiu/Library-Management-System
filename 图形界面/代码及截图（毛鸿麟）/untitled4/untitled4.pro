@@ -27,15 +27,27 @@ SOURCES += \
         main.cpp \
         mainpage.cpp \
     usermanager.cpp \
-    bookmanager.cpp
+    bookmanager.cpp \
+    updateuser.cpp \
+    userdelete.cpp \
+    bookupdate.cpp \
+    bookdelete.cpp
 
 HEADERS += \
         mainpage.h \
     usermanager.h \
     bookmanager.h \
-    chooseform.h
+    chooseform.h \
+    updateuser.h \
+    userdelete.h \
+    bookupdate.h \
+    bookdelete.h
 
 FORMS += \
         mainpage.ui \
     usermanager.ui \
-    bookmanager.ui
+    bookmanager.ui \
+    updateuser.ui \
+    userdelete.ui \
+    bookupdate.ui \
+    bookdelete.ui
