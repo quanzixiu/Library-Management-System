@@ -1,0 +1,6 @@
+﻿  deleteuser.cpp
+C:\Users\qzx\Desktop\逻辑层\Supervisor\userstatesdocking.h(18,21): error C3646: “database”: 未知重写说明符
+C:\Users\qzx\Desktop\逻辑层\Supervisor\userstatesdocking.h(18,21): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+  userstatesdocking.cpp
+  正在生成代码...
+C:\Users\qzx\Desktop\逻辑层\Supervisor\userstatesdocking.cpp(65): warning C4715: “userstatesdocking::ussearch”: 不是所有的控件路径都返回值
