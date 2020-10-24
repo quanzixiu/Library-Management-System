@@ -340,7 +340,17 @@ int main()
 
 ```
 
+### 3. 使用说明
 
+​	为使用Search类函数功能，请调用Search::indexFile_Traverse()函数，此函数会调用Search类的各个成员函数以生成快速索引。此函数有1个原型与2个重载：
+
+​	原型不需要提供参数，生成的findex.txt文件中，键值对以(id, value)的形式存储，其中value是长度为80的数据串。
+
+​	重载Search::indexFile_Traverse(string mod)的参数mod是生成模式，可接受的输入是"ISBN"."name"."author"三者之一，会按提供的参数分别生成fISBNindex.txt、fnameindex.txt、fauthorindex.txt三种文件，键值对分别以(id, somevalue)的形式存储，其中somevalue是长度分别为6、8、4的短字符串，从value字符串的0-5位、6-13位、14-17位截取而得。
+
+​	重载Search::indexFile_Traverse(int str_min, int str_len)的两个参数是截取字符串的起始位与长度（从0开始），会从value中截取第str_min位到第str_min+str_len位的数据，与ID一起存入fmindex.txt中，格式与前述类似。读取fmindex.txt时需要事先规定读取的位数str_len，不然可能会导致逻辑混乱。
+
+​	Search::indexFile_Traverse()不需要手动运行，在对底层的增删改查结束后，退出管理员系统时会自动运行，更新对应的快速索引文件以备用户系统使用。也可以在管理员系统中手动调用，以便管理员使用。完全遍历一次数据的时间复杂度较高，所以请谨慎使用Search::indexFile_Traverse()函数，切不可将其加入任何形式的循环或者嵌套调用之中，以免影响使用体验。
 
 ## 三、备注
 
