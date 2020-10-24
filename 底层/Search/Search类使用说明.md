@@ -352,6 +352,8 @@ int main()
 
 ​	Search::indexFile_Traverse()不需要手动运行，在对底层的增删改查结束后，退出管理员系统时会自动运行，更新对应的快速索引文件以备用户系统使用。也可以在管理员系统中手动调用，以便管理员使用。完全遍历一次数据的时间复杂度较高，所以请谨慎使用Search::indexFile_Traverse()函数，切不可将其加入任何形式的循环或者嵌套调用之中，以免影响使用体验。
 
+​	此外，应注意的是，Search::indexFile_Traverse()会调用Search::indexFile_Search()与Search::indexFile_Create()函数，涉及C++ STL的vector容器，尤其是vector<string>操作，若容器存取的string是空串('\0')，会引发std::out_of_range异常。Search::indexFile_Search()与Search::indexFile_Create()会默认创建失败，进而退出函数体。
+
 ## 三、备注
 
 需要结合定义后的database后台文件使用。尚未使用数据进行验证，仅保证能运行。对于初始状态的index、data文件，运行所需时间为3s，占用内存3MB。
