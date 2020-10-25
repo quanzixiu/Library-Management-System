@@ -354,6 +354,34 @@ int main()
 
 ​	此外，应注意的是，Search::indexFile_Traverse()会调用Search::indexFile_Search()与Search::indexFile_Create()函数，涉及C++ STL的vector容器，尤其是vector<string>操作，若容器存取的string是空串('\0')，会引发std::out_of_range异常。Search::indexFile_Search()与Search::indexFile_Create()会默认创建失败，进而退出函数体。
 
-## 三、备注
+## 三、运行与调试
 
-需要结合定义后的database后台文件使用。尚未使用数据进行验证，仅保证能运行。对于初始状态的index、data文件，运行所需时间为3s，占用内存3MB。
+### 1. Search::indexFile_Traverse()
+
+未定义相关调用，请修改main.cpp文件以使用
+
+### 2. Search::indexFile_Traverse(string mod)
+
+#### (1). mod == ISBN
+
+![VsDebugConsole_[44] 2020-10-25 19_50_57](img/VsDebugConsole_[44] 2020-10-25 19_50_57.png)
+
+#### (2). mod == name
+
+![VsDebugConsole_[45] 2020-10-25 19_51_21](img/VsDebugConsole_[45] 2020-10-25 19_51_21.png)
+
+由于value中不包含name，所以vector<string>会读取到空串，进而引发std::out_of_range异常，被catch子句捕获并退出函数。
+
+#### (3). mod == author
+
+![VsDebugConsole_[46] 2020-10-25 19_51_48](img/VsDebugConsole_[46] 2020-10-25 19_51_48.png)
+
+由于value中不包含author，所以vector<string>会读取到空串，进而引发std::out_of_range异常，被catch子句捕获并退出函数。
+
+
+
+## 四、备注
+
+​	需要结合定义后的database后台文件使用。尚未使用数据进行验证，仅保证能运行。对于初始状态的index、data文件，运行所需时间为3s，占用内存3MB。
+
+​	一种改进方法：对文件尾的空串判断为读取成功，文件中部的空串判断为读取错误。上述功能有待实际验证。
