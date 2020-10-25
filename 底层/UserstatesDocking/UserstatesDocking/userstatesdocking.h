@@ -12,6 +12,7 @@ public:
 	bool usdelete(int id,string bookid);
 	string ussearch(int id);
 	bool usexist(int id);
+	bool usdeleteall(int id);
 
 private:
 	Database database;

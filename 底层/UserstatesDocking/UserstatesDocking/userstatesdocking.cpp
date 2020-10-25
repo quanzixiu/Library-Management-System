@@ -71,7 +71,12 @@ bool userstatesdocking::usexist(int id) {
 		return false;
 }
  
-
+bool userstatesdocking::usdeleteall(int id) {
+	if (database.remove(id))
+		return true;
+	else
+		return false;
+}
 
 //字段如果没有达到规定大小则 将空余的地方填充空格
 string dataformatting(int n, string data)
