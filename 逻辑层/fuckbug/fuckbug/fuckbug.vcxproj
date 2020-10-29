@@ -19,18 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bookdocking.cpp" />
     <ClCompile Include="bookCache.cpp" />
+    <ClCompile Include="bookdocking.cpp" />
     <ClCompile Include="bookDatabase.cpp" />
     <ClCompile Include="creatbook.cpp" />
     <ClCompile Include="createuser.cpp" />
     <ClCompile Include="deletebook.cpp" />
     <ClCompile Include="deleteuser.cpp" />
     <ClCompile Include="dataformating.cpp" />
+    <ClCompile Include="slogin.cpp" />
     <ClCompile Include="managebook.cpp" />
     <ClCompile Include="manageuser.cpp" />
     <ClCompile Include="modifybook.cpp" />
     <ClCompile Include="modifyuserdata.cpp" />
+    <ClCompile Include="returnbook.cpp" />
     <ClCompile Include="searchuser.cpp" />
     <ClCompile Include="userstatesCache.cpp" />
     <ClCompile Include="userstatesDatabase.cpp" />
@@ -44,6 +46,7 @@
     <ClInclude Include="bookdocking.h" />
     <ClInclude Include="bookCache.h" />
     <ClInclude Include="bookDatabase.h" />
+    <ClInclude Include="returnbook.h" />
     <ClInclude Include="supervisor.h" />
     <ClInclude Include="userstatesCache.h" />
     <ClInclude Include="userstatesDatabase.h" />

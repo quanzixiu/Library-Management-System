@@ -19,7 +19,7 @@ void supervisor::deleteuser() {
 	userdocking udocking;
 	userstatesdocking usdocking;
 	//string bklist;
-	//bklist = "123";
+	//bklist = "";
 	//bklist = dataformatting(120, bklist);
 	cout << "请输入待删除用户的ID：";
 	cin >> id;

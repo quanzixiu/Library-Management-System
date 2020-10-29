@@ -27,9 +27,6 @@
     <ClCompile Include="bookdocking.cpp">
       <Filter>头文件\book</Filter>
     </ClCompile>
-    <ClCompile Include="bookCache.cpp">
-      <Filter>头文件\book</Filter>
-    </ClCompile>
     <ClCompile Include="bookDatabase.cpp">
       <Filter>头文件\book</Filter>
     </ClCompile>
@@ -84,6 +81,15 @@
     <ClCompile Include="dataformating.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="returnbook.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="bookCache.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="slogin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bookdocking.h">
@@ -114,6 +120,9 @@
       <Filter>头文件\userstates</Filter>
     </ClInclude>
     <ClInclude Include="supervisor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="returnbook.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

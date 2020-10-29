@@ -7,7 +7,7 @@ using namespace std;
 class supervisor {
 
 public:
-
+	bool slogin();//管理员登录;
 	void searchuser();//查找用户
 	void createuser();//创建新用户
 	void modifyuserdata();//修改用户借阅信息

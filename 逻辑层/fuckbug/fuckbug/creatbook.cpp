@@ -14,8 +14,8 @@ void supervisor::createbook() {
 	int id;
 	string borrowtime, returntime, history, onsheelf, isovertime;
 	borrowtime = "00-00-00";
-	returntime = "00-00-00";
-	history = "";
+	returntime = "20201101";
+	history = "123456789012345678901234567890";
 	onsheelf = "1";
 	isovertime = "0";
 	string value;
