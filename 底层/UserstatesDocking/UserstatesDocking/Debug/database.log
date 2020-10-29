@@ -1,0 +1,4 @@
+﻿D:\Program Files\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(BookDocking.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  userstatesdocking.cpp
+C:\Users\qzx\Desktop\新建文件夹\UserstatesDocking\UserstatesDocking\userstatesdocking.cpp(65): warning C4715: “userstatesdocking::ussearch”: 不是所有的控件路径都返回值
+  database.vcxproj -> C:\Users\qzx\Desktop\新建文件夹\UserstatesDocking\Debug\UserstatesDocking.exe

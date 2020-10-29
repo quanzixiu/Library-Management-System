@@ -1,0 +1,139 @@
+#include "bookdocking.h"
+
+bookdocking::bookdocking(){}
+
+
+
+bool bookdocking::bookadd(int id,string ISBN, string name, string author, string type, string borrowtime, string returntime, string histroy, string onsheelf, string isovertime)
+{
+	value = ISBN + name + author + type + borrowtime + returntime + histroy + onsheelf + isovertime;
+	if (database.insert(id, value))
+	return true;
+	else
+	return false;
+
+}
+bool bookdocking::bookdelete(int id) {
+	if (database.remove(id))
+	return true;
+	else
+	return false;
+}
+
+string bookdocking::booksearch(int id) {
+	if (database.select(id, value))
+	return value;
+}
+
+bool bookdocking::bookexist(int id) {
+	if (database.select(id, value))
+		return true;
+	else
+		return false;
+}
+bool bookdocking::bookmodifyISBN(int id, string ISBN) {
+	if (database.select(id, value)) {
+		value.replace(0, 6, ISBN);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyname(int id, string name) {
+	if (database.select(id, value)){
+		value.replace(6, 8, name);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyauthor(int id, string author) {
+	if (database.select(id, value)){
+		value.replace(14, 4, author);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifytype(int id, string type) {
+	if (database.select(id, value)){
+		value.replace(18, 4, type);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyborrowtime(int id, string borrowtime) {
+	if (database.select(id, value)){
+		value.replace(22, 8, borrowtime);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyreturntime(int id, string returntime) {
+	if (database.select(id, value)){
+		value.replace(30, 8, returntime);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyhistory(int id, string history) {
+	if (database.select(id, value)){
+		value.replace(38, 40, history);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyonsheelf(int id, string onsheelf) {
+	if (database.select(id, value)){
+		value.replace(78, 1, onsheelf);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}bool bookdocking::bookmodifyisovertime(int id, string isovertime) {
+	if (database.select(id, value)){
+		value.replace(79, 1, isovertime);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+
+//�ֶ����û�дﵽ�涨��С�� ������ĵط����ո�
+string dataformatting(int n, string data)
+{
+	data.append(n - data.size(), ' ');
+	return data;
+}
+
