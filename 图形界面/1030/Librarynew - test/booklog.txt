@@ -1,0 +1,6 @@
+
+SELECT key:123
+[indexFile_find] middle:1 tmp:12
+[indexFile_find] key:123 address:8 begin:1 end:2 middle:1 tmp:12 size:2
+[indexFile_find] last:121
+SELECT find result:4
