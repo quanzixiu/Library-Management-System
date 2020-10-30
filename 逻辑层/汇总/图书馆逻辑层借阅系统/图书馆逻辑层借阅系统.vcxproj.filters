@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="book.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="user.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="borrow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BookDocking\bookCache.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BookDocking\bookDatabase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BookDocking\bookdocking.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDocking\userCache.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDocking\userDatabase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDocking\userdocking.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserstatesDocking\userstatesCache.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserstatesDocking\userstatesDatabase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserstatesDocking\userstatesdocking.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="returnbook.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="supervisor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="book.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="user.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="borrow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BookDocking\bookCache.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BookDocking\bookDatabase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BookDocking\bookdocking.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserDocking\userCache.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserDocking\userDatabase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserDocking\userdocking.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="dataformating.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserstatesDocking\userstatesCache.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserstatesDocking\userstatesDatabase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserstatesDocking\userstatesdocking.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="adminmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="creatbook.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="createuser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="deletebook.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="deleteuser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="managebook.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="manageuser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="modifybook.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="modifyuserdata.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="returnbook.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="searchuser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="slogin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
