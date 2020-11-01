@@ -12,6 +12,7 @@ void supervisor::manageuser(userdocking& ud, userstatesdocking& usd) {
 
 	while (true)
 	{
+		system("cls");
 		cout << "1.查找用户" << endl;
 		cout << "2.增加用户" << endl;
 		cout << "3.删除用户" << endl;

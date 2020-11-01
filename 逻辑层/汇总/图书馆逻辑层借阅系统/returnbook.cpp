@@ -33,7 +33,7 @@ bool isovertime(string returntime)
 
 
 void returnbook::returnBook(bookdocking& bd,userstatesdocking& usd) {
-	
+	supervisor s;
 	int i;
 	int count=0;
 	int cutCount;
@@ -68,7 +68,7 @@ void returnbook::returnBook(bookdocking& bd,userstatesdocking& usd) {
 				//修改用户借阅信息
 				history = value.substr(38, 40);//该图书的借书记录
 				//找最后一个借书用户ID
-				for (i = 40; i > 0; i--)
+				for (i =39; i >= 0; i--)
 				{
 					if (history[i] == ' ')//逆序遍历历史记录，如果是填充的空字符就让计数器加一
 						count++;
@@ -76,10 +76,11 @@ void returnbook::returnBook(bookdocking& bd,userstatesdocking& usd) {
 						break;//找到第一个不是填充的字符位置，包括在最后一个借阅用户id中
 				}
 				cutCount = 8 - count % 8;//最后一个借阅用户ID位数
-				lastHistory = history.substr(40 - count - cutCount, 8);//截取最后一个借阅用户的8位id（string）
+				lastHistory = history.substr(40 - count-cutCount, 8);//截取最后一个借阅用户的8位id（string）
+				
 				userid = atoi(lastHistory.c_str());//string转换成int
 				bookid = std::to_string(id);//输入的图书id int转换成string
-				if (usd.usdelete(userid, bookid))
+				if (usd.usdelete(userid, s.dataformatting(6,bookid)))
 				{
 					if (count == 32) usd.usdeleteall(id);//当前用户已经归还所有图书
 					//修改图书在架信息
@@ -94,6 +95,8 @@ void returnbook::returnBook(bookdocking& bd,userstatesdocking& usd) {
 		}
 			
 	}
+	cout << endl;
+	cout << "输入0退出：";
 	int ppp=-1;
 	cin >> ppp;
 	while (ppp!=0)

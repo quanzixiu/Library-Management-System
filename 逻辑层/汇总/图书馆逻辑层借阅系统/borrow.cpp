@@ -34,39 +34,217 @@ void borrow::main(bookdocking& bd, userdocking& ud, userstatesdocking& usd)
 	}
 }
 
-bool borrow::qtlogin(int id, string password)
+bool borrow::qtlogin(int id, string password, userdocking& ud)
 {
+	//定义用户登陆信息的变量
+	string value, name, college, major, email;
+	//登陆
+	while (!islogin)
+	{
+		if (ud.userexist(id))
+		{
+			if (login(id, password, ud))
+			{
+				value = ud.usersearch(id);
+				//把得到的包含所有信息的字符串分发给各个字段
+				name = value.substr(0, 8);
+				college = value.substr(8, 4);
+				major = value.substr(12, 4);
+				password = value.substr(16, 16);
+				email = value.substr(32, 24);
+
+
+				//给Student传入信息
+				student.setid(id);
+				student.setpassword(password);
+				student.setname(name);
+				student.setcollege(college);
+				student.setmajor(major);
+				student.setemail(email);
+				islogin = true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+
+	}
 	return false;
 }
 
-bool borrow::qtborrowbook(int id)
+bool borrow::qtborrowbook(int id, bookdocking& bd, userstatesdocking& usd)
 {
-	return false;
+	//判断书籍是否在架
+	if (bd.bookexist(id))
+	{
+		string value, borrowtime, returntime, onsheelf, history;
+		value = bd.booksearch(id);
+		//把得到的包含所有信息的字符串分发给各个字段
+		borrowtime = value.substr(22, 8);
+		returntime = value.substr(30, 8);
+		history = value.substr(38, 40);
+		onsheelf = value.substr(78, 1);
+
+		if (onsheelf == "0") {
+			return false;
+		}
+		else
+		{
+			bool flag = true;
+			if (!usd.usexist(student.getid()))
+			{
+				string pp;
+				pp = dataformatting(120, to_string(id));
+				usd.uscreate(student.getid(), pp);
+			}
+			else
+			{
+				string value = usd.ussearch(student.getid());
+				value = dataformatting(120, value);
+
+				if (value.at(114) != ' ')
+				{
+					flag = false;
+					return false;
+				}
+				else
+				{
+					usd.usadd(student.getid(), dataformatting(6, to_string(id)));
+				}
+			}
+			if (flag)
+			{
+				onsheelf = "0";
+				onsheelf = dataformatting(1, onsheelf);
+				bd.bookmodifyonsheelf(id, onsheelf);
+
+
+				if (history.at(32) != ' ')
+					history = dataformatting(8, to_string(student.getid()));
+				else
+				{
+					int cnt = 0;
+					for (int i = 0; i <= 4; i++)
+					{
+						if (history.at(i * 8) != ' ')cnt++;
+					}
+					history = history.substr(0, cnt * 8) + dataformatting(8, to_string(student.getid()));
+				}
+
+				history = dataformatting(40, history);
+				bd.bookmodifyhistory(id, history);
+
+				time_t* timer = NULL;
+				time_t timet = time(timer);
+				const  time_t* timerp = &timet;
+				tm* t = localtime(timerp);
+				borrowtime = to_string(t->tm_year + 1900) + num2str((t->tm_mon + 1)) + num2str(t->tm_mday);
+				returntime = to_string(t->tm_year + 1900) + num2str((t->tm_mon + 1) % 12 + 1) + num2str(t->tm_mday);
+
+				dataformatting(8, borrowtime);
+				dataformatting(8, returntime);
+				bd.bookmodifyborrowtime(id, borrowtime);
+				bd.bookmodifyreturntime(id, returntime);
+
+				return true;
+			}
+
+		}
+
+	}
+	else {
+		return false;
+	}
+	//借阅时更改图书借阅在架、借书还书时间、借阅历史
+	//修改借阅记录类
 }
 
-book borrow::qtidsearchbook(int id)
+book borrow::qtidsearchbook(int id, bookdocking& bd)
 {
-	return book();
+	string value;
+	book b;
+	value = bd.booksearch(id);
+	b.setISBN(value.substr(0, 6));
+	b.setname(value.substr(6, 8));
+	b.setauthor(value.substr(14, 4));
+	b.settype(value.substr(18, 4));
+	b.setborrowtime(value.substr(22, 8));
+	b.setreturntime(value.substr(30, 8));
+	b.sethistory(value.substr(38, 40));
+	b.setonsheelf(value.substr(78, 1));
+	b.setisovertime(value.substr(79, 1));
+	return b;
 }
 
-user borrow::qtidsearchuser(int id)
+user borrow::qtidsearchuser(int id, userdocking& ud)
 {
-	return user();
+	user stu;
+	string value, name, college, major, email,password;
+	value = ud.usersearch(id);
+	//把得到的包含所有信息的字符串分发给各个字段
+	name = value.substr(0, 8);
+	college = value.substr(8, 4);
+	major = value.substr(12, 4);
+	password = value.substr(16, 16);
+	email = value.substr(32, 24);
+
+	//给Student传入信息
+	stu.setid(id);
+	stu.setpassword(password);
+	stu.setname(name);
+	stu.setcollege(college);
+	stu.setmajor(major);
+	stu.setemail(email);
+	
+	return stu;
 }
 
-bool borrow::qtbookexist(int id)
+bool borrow::qtbookexist(int id, bookdocking& bd)
 {
-	return false;
+	return bd.bookexist(id);
 }
 
-int* borrow::qtreusercard(int id)
+tuple<int,int*> borrow::qtreusercard(int id, bookdocking& bd)
 {
-	return nullptr;
+	string value;
+	value = bd.booksearch(id);
+	string history=value.substr(38, 40);
+	int cnt = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		if (history.at(i * 8) != ' ')cnt++;
+	}
+	int* temp = new int[cnt];
+	for (int i = 0; i < cnt; i++)
+	{
+		temp[i] = atoi(history.substr(i*8,8).c_str());
+	}
+	tuple<int, int*> t(cnt,temp);
+	return t;
 }
 
-int* borrow::qtrebookbor(int id)
+tuple<int,int*> borrow::qtrebookbor(int id, userstatesdocking& usd)
 {
-	return nullptr;
+	string value;
+	value = usd.ussearch(id);
+	string list = value.substr(0, 120);
+	int cnt = 0;
+	for (int i = 0; i < 20; i++)
+	{
+		if (list.at(i * 6) != ' ')cnt++;
+	}
+	int* temp = new int[cnt];
+	for (int i = 0; i < cnt; i++)
+	{
+		temp[i] = atoi(value.substr(i * 6, 6).c_str());
+	}
+	tuple<int, int*> t(cnt, temp);
+	return t;
 }
 
 bool borrow::login(int id, string password,userdocking& ud)
@@ -333,7 +511,6 @@ void borrow::loginPanel(userdocking& ud)
 	//登陆
     while (!islogin)
     {
-		
         cout << "请输入您的ID：";
         cin >> id;
         cout << "请输入密码：";
@@ -442,11 +619,11 @@ int borrow::mainPanel(userdocking& ud)
     int n=0;
 	while (n != -1&&!islogin)//用户选择退出或者登陆成功时 跳出该界面
 	{
-		string str;
 		n = 0;
 		cout << "1.login" << endl;
 		cout << "2.register" << endl;
 		cout << "-1.return" << endl;
+		string str;
 		cin >> str;
 		n=atoi(str.c_str());
 		switch(n)
@@ -457,6 +634,8 @@ int borrow::mainPanel(userdocking& ud)
 
 		case -1:returnPrevious(); break;
 		default:
+			system("cls");
+				cout << "首页》》用户借阅系统主界面" << endl;
 			cout << "无效输入！请重试！" << endl;
 			break;
 		}

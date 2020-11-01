@@ -5,12 +5,10 @@
 
 void supervisor::adminmain(bookdocking& bd,userdocking& ud,userstatesdocking& usd)
 {
-	supervisor admin;
 	string choice;
 	while (true)
 	{
-		if (admin.slogin())
-		{
+		if (islogin || slogin()) {
 			cout << "请选择功能：" << endl;
 			cout << "1.图书管理" << endl;
 			cout << "2.用户管理" << endl;
@@ -18,14 +16,17 @@ void supervisor::adminmain(bookdocking& bd,userdocking& ud,userstatesdocking& us
 			cin >> choice;
 			if (choice == "1")
 			{
-				admin.managebook(bd);
+				managebook(bd);
+				system("cls");
 			}
 			else if (choice == "2")
 			{
-				admin.manageuser(ud,usd);
+				manageuser(ud, usd);
+				system("cls");
 			}
 			else if (choice == "0")
 			{
+				islogin = false;
 				break;
 			}
 			else

@@ -10,6 +10,7 @@
 #include <ostream>
 #include "time.h"
 #include <sstream>
+#include <tuple>
 using namespace std;
 
 
@@ -32,13 +33,13 @@ public:
 
 	void main(bookdocking& bd, userdocking& ud, userstatesdocking& usd);//主控函数
 
-	bool qtlogin(int id, string password);//存好用户信息
-	bool qtborrowbook(int id);
-	book qtidsearchbook(int id);
-	user qtidsearchuser(int id);
-	bool qtbookexist(int id);
-	int*  qtreusercard(int id);//借书卡
-	int* qtrebookbor(int id);//借阅信息
+	bool qtlogin(int id, string password, userdocking& ud);//存好用户信息
+	bool qtborrowbook(int id,bookdocking& bd, userstatesdocking& usd);
+	book qtidsearchbook(int id, bookdocking& bd);
+	user qtidsearchuser(int id, userdocking& ud);
+	bool qtbookexist(int id, bookdocking& bd);
+	tuple<int,int*>  qtreusercard(int id, bookdocking& bd);//借书卡
+	tuple<int,int*> qtrebookbor(int id, userstatesdocking& usd);//借阅信息
 
 	bool login(int id, string password,userdocking& ud);//存好用户信息
 	void loginPanel(userdocking& ud);

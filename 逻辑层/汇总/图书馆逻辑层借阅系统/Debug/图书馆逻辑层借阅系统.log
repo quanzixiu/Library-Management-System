@@ -1,25 +1,3 @@
-﻿  adminmain.cpp
-  bookdocking.cpp
-  borrow.cpp
-  creatbook.cpp
-  createuser.cpp
-  dataformating.cpp
-  deletebook.cpp
-  deleteuser.cpp
-  main.cpp
-  managebook.cpp
-  manageuser.cpp
-C:\Users\71031\source\repos\图书馆逻辑层借阅系统\图书馆逻辑层借阅系统\manageuser.cpp(8,6): warning C4101: “id”: 未引用的局部变量
-  modifybook.cpp
-  modifyuserdata.cpp
-  returnbook.cpp
-C:\Users\71031\source\repos\图书馆逻辑层借阅系统\图书馆逻辑层借阅系统\returnbook.cpp(42,7): warning C4101: “c”: 未引用的局部变量
-  searchuser.cpp
-  slogin.cpp
-  userdocking.cpp
-  userstatesdocking.cpp
-  正在生成代码...
-C:\Users\71031\source\repos\图书馆逻辑层借阅系统\图书馆逻辑层借阅系统\UserstatesDocking\userstatesdocking.cpp(65): warning C4715: “userstatesdocking::ussearch”: 不是所有的控件路径都返回值
-C:\Users\71031\source\repos\图书馆逻辑层借阅系统\图书馆逻辑层借阅系统\UserDocking\userdocking.cpp(25): warning C4715: “userdocking::usersearch”: 不是所有的控件路径都返回值
-C:\Users\71031\source\repos\图书馆逻辑层借阅系统\图书馆逻辑层借阅系统\BookDocking\bookdocking.cpp(24): warning C4715: “bookdocking::booksearch”: 不是所有的控件路径都返回值
+﻿  main.cpp
+C:\Users\71031\source\repos\图书馆逻辑层借阅系统\图书馆逻辑层借阅系统\main.cpp(8,13): warning C4101: “r”: 未引用的局部变量
   图书馆逻辑层借阅系统.vcxproj -> C:\Users\71031\source\repos\图书馆逻辑层借阅系统\Debug\图书馆逻辑层借阅系统.exe

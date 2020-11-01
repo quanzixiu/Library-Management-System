@@ -10,6 +10,7 @@ using namespace std;
 class supervisor {
 
 public:
+	bool islogin;
 	void adminmain(bookdocking& bd, userdocking& ud, userstatesdocking& usd);
 	bool slogin();//管理员登录;
 	void searchuser(userdocking& ud);//查找用户
@@ -17,7 +18,7 @@ public:
 	void modifyuserdata(userdocking& ud);//修改用户借阅信息
 	void deleteuser(userdocking& ud, userstatesdocking& usd);//删除用户
 
-	supervisor() { ; }
+	supervisor() { islogin=false; }
 
 	void createbook(bookdocking& bd);//增加新图书
 	void modifybook(bookdocking& bd);//修改图书信息

@@ -15,8 +15,19 @@ bool supervisor::slogin() {
 	cin >> password;
 	if (id == ID)
 		if (Password == password)
+		{
+			system("cls");
+			islogin = true;
 			return true;
-		else
+		}
+		else {
+			system("cls");
+			cout << "µÇÂ½Ê§°Ü£¡ÇëÖØÐÂÊäÈë£¡" << endl;
 			return false;
-	else return false;
+		}
+	else {
+		system("cls");
+		cout << "µÇÂ½Ê§°Ü£¡ÇëÖØÐÂÊäÈë£¡" << endl;
+		return false;
+	}
 }

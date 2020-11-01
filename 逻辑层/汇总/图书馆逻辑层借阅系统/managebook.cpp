@@ -6,6 +6,7 @@ void supervisor::managebook(bookdocking& bd) {
 	string op;
 	while (true)
 	{
+		system("cls");
 		cout << "1.增加图书" << endl;
 		cout << "2.删除图书" << endl;
 		cout << "3.修改图书信息" << endl;
