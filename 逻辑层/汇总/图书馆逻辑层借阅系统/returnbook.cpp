@@ -46,9 +46,16 @@ void returnbook::returnBook(bookdocking& bd,userstatesdocking& usd) {
 	string returntime;
 	string history;
 	string lastHistory;
+	string ID;
 
 	cout << "请输入要归还图书的ID：";
-	cin >> id;
+	cin >> ID;
+	while (ID.length() > 6 || atoi(ID.c_str()))//ID不能长度超过6或者包含字母或者单独为0
+	{
+		cout << "输入有误，请重新输入:";
+		cin >> ID;
+	}
+	id = atoi(ID.c_str());
 
 	if (!bd.bookexist(id))
 		cout << "该图书不存在！";

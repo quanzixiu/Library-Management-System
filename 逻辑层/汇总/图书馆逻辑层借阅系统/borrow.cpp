@@ -23,14 +23,14 @@ void borrow::setPassWord(string password)
 }
 
 
-void borrow::main(bookdocking& bd, userdocking& ud, userstatesdocking& usd)
+void borrow::main(bookdocking& bd, userdocking& ud, userstatesdocking& usd, deque<int>& dqID, deque<string>& dqNAME, deque<string>& dqISBN, deque<string>& dqTYPE, bool& dqflag)
 {
 	int n=0;
 	while(1)
 	{
 		n=mainPanel(ud);
 		if (n == -1)break;
-		main1Panel(bd,ud,usd);
+		main1Panel(bd,ud,usd,dqID,dqNAME,dqISBN,dqTYPE,dqflag);
 	}
 }
 
@@ -131,9 +131,9 @@ bool borrow::qtborrowbook(int id, bookdocking& bd, userstatesdocking& usd)
 					int cnt = 0;
 					for (int i = 0; i <= 4; i++)
 					{
-						if (history.at(i * 8) != ' ')cnt++;
+						if (history.at(i * (8)) != ' ')cnt++;
 					}
-					history = history.substr(0, cnt * 8) + dataformatting(8, to_string(student.getid()));
+					history = history.substr(0, cnt * (8)) + dataformatting(8, to_string(student.getid()));
 				}
 
 				history = dataformatting(40, history);
@@ -217,12 +217,12 @@ tuple<int,int*> borrow::qtreusercard(int id, bookdocking& bd)
 	int cnt = 0;
 	for (int i = 0; i < 5; i++)
 	{
-		if (history.at(i * 8) != ' ')cnt++;
+		if (history.at(i * (8)) != ' ')cnt++;
 	}
 	int* temp = new int[cnt];
 	for (int i = 0; i < cnt; i++)
 	{
-		temp[i] = atoi(history.substr(i*8,8).c_str());
+		temp[i] = atoi(history.substr(i*(8),8).c_str());
 	}
 	tuple<int, int*> t(cnt,temp);
 	return t;
@@ -236,12 +236,12 @@ tuple<int,int*> borrow::qtrebookbor(int id, userstatesdocking& usd)
 	int cnt = 0;
 	for (int i = 0; i < 20; i++)
 	{
-		if (list.at(i * 6) != ' ')cnt++;
+		if (list.at(i * (6)) != ' ')cnt++;
 	}
 	int* temp = new int[cnt];
 	for (int i = 0; i < cnt; i++)
 	{
-		temp[i] = atoi(value.substr(i * 6, 6).c_str());
+		temp[i] = atoi(value.substr(i * (6), 6).c_str());
 	}
 	tuple<int, int*> t(cnt, temp);
 	return t;
@@ -256,91 +256,142 @@ bool borrow::login(int id, string password,userdocking& ud)
 	else return false;
 }
 
-void borrow::typeshowbook()
+void borrow::typeshowbook(string type,bookdocking& bd, userstatesdocking& usd, deque<int>& dqID, deque<string>& dqTYPE)
 {
+	int cnt = 0;
+	for (int i = 0; i < dqID.size(); i++)
+	{
+		if (dqTYPE.at(i) == dataformatting(4,type)) {
+			cnt++;
+			string value;
+			cout << cnt << "." << endl;
+			value = bd.booksearch(dqID.at(i));
+			cout << "ID:" << dqID.at(i) << endl;
+			cout << "ISBN:" << value.substr(0, 6) << endl;
+			cout << "书名:" << value.substr(0, 6) << endl;
+			cout << "作者:" << value.substr(14, 4) << endl;
+			cout << "分类:" << value.substr(18, 4) << endl;
+			cout << "是否在架:" << value.substr(78, 1) << endl;
+			cout << "借书时间:" << value.substr(22, 8) << endl;
+			cout << "还书时间:" << value.substr(30, 8) << endl;
+			cout << "借阅历史:" << value.substr(38, 40) << endl;
+		}
+	}
+	int p;
+	cout << "请输入要借阅书籍的ID（按0退出）：";
+	cin >> p;
+	if (p == 0)return;
+	else
+	{
+		borrowbook(dqID.at(p - 1), bd, usd);
+	}
 }
 
-void borrow::ISBNsearchbook()
+void borrow::ISBNsearchbook(bookdocking& bd, userstatesdocking& usd, deque<int>& dqID, deque<string>& dqISBN)
 {
-	//打印信息
-	int n;
+	string isbn;
+	int cnt = 0;
+	cout << "请输入ISBN：";
+	cin >> isbn;
+	for (int i = 0; i < dqID.size(); i++)
+	{
+		if (dqISBN.at(i) == dataformatting(6,isbn)) {
+			cnt++;
+			string value;
+			cout<<cnt<<"."<<endl;
+			value=bd.booksearch(dqID.at(i));
+			cout << "ID:" << dqID.at(i) << endl;
+			cout << "ISBN:" << value.substr(0, 6) << endl;
+			cout << "书名:" << value.substr(0, 6) << endl;
+			cout << "作者:" << value.substr(14, 4) << endl;
+			cout << "分类:" << value.substr(18, 4) << endl;
+			cout << "是否在架:" << value.substr(78, 1) << endl;
+			cout << "借书时间:" << value.substr(22, 8) << endl;
+			cout << "还书时间:" << value.substr(30, 8) << endl;
+			cout << "借阅历史:" << value.substr(38, 40) << endl;
+		}
+	}
+	int p;
+	cout << "请输入要借阅书籍的ID（按0退出）：";
+	cin >> p;
+	if (p == 0)return;
+	else 
+	{
+		borrowbook(dqID.at(p-1),bd,usd);
+	}
 	
-	while (true)
-	{
-		cout << "1.查看书籍详情" << endl;
-		cout << "2.翻到上/下一页" << endl;
-		cout << "0.退出" << endl;
-		n = -1;
-		cin >> n;
-		switch (n) 
-		{
-		case 1:
-			clickinPanel();
-			break;
-		case 2:
-			nextpage();
-			break;
-		case 0:break;
-
-		}
-			
-	}
-
-
 }
 
-void borrow::namesearchbook()
+void borrow::namesearchbook(bookdocking& bd, userstatesdocking& usd, deque<int>& dqID, deque<string>& dqNAME)
 {
-	//打印信息
-	int n;
-
-	while (true)
+	string name;
+	int cnt = 0;
+	cout << "请输入名字：";
+	cin >> name;
+	for (int i = 0; i < dqID.size(); i++)
 	{
-		cout << "1.查看书籍详情" << endl;
-		cout << "2.翻到上/下一页" << endl;
-		cout << "0.退出" << endl;
-		n = -1;
-		cin >> n;
-		switch (n)
-		{
-		case 1:
-			clickinPanel();
-			break;
-		case 2:
-			nextpage();
-			break;
-		case 0:break;
-
+		if (dqNAME.at(i) == dataformatting(8,name)) {
+			cnt++;
+			string value;
+			cout << cnt << "." << endl;
+			value = bd.booksearch(dqID.at(i));
+			cout << "ID:" << dqID.at(i) << endl;
+			cout << "ISBN:" << value.substr(0, 6) << endl;
+			cout << "书名:" << value.substr(0, 6) << endl;
+			cout << "作者:" << value.substr(14, 4) << endl;
+			cout << "分类:" << value.substr(18, 4) << endl;
+			cout << "是否在架:" << value.substr(78, 1) << endl;
+			cout << "借书时间:" << value.substr(22, 8) << endl;
+			cout << "还书时间:" << value.substr(30, 8) << endl;
+			cout << "借阅历史:" << value.substr(38, 40) << endl;
 		}
+	}
+	int p;
+	cout << "请输入要借阅书籍的ID（按0退出）：";
+	cin >> p;
+	if (p == 0)return;
+	else
+	{
+		borrowbook(dqID.at(p - (1)), bd, usd);
 	}
 }
 
 
-void borrow::typedisplay()
+string borrow::typedisplay(deque<string>& dqTYPE)
 {
-
-	//打印信息
-	int n;
-
-	while (true)
+	int cnt = 0;
+	deque<string> type;
+	int typenum,j;
+	bool flag;
+	for (int i = 0; i < dqTYPE.size(); i++)
 	{
-		cout << "1.查看书籍详情" << endl;
-		cout << "2.翻到上/下一页" << endl;
-		cout << "0.退出" << endl;
-		n = -1;
-		cin >> n;
-		switch (n)
+		flag = false;
+		j = 0; 
+		typenum=type.size();
+		while(j<typenum)
 		{
-		case 1:
-			clickinPanel();
-			break;
-		case 2:
-			nextpage();
-			break;
-		case 0:break;
-
+			if (dqTYPE.at(i) == type.at(j)) {
+				flag = true;
+				break;
+			}
+			j++;
+		}	
+		if (!flag) {
+			cnt++;
+			cout << cnt << "." << dqTYPE.at(i) << endl;
+			type.push_back(dqTYPE.at(i));
 		}
 	}
+
+	int p;
+	cout << "请输入要查看的类的编号（按0退出）：";
+	cin >> p;
+	if (p == 0)return "NULL";
+	else
+	{
+		return type.at(p - 1);
+	}
+	
 }
 
 void borrow::nextpage()
@@ -411,9 +462,9 @@ void borrow::borrowbook(int id,bookdocking& bd,userstatesdocking& usd)
 					int cnt=0;
 					for (int i=0; i <= 4; i++)
 					{
-						if (history.at(i*8)!=' ')cnt++;
+						if (history.at(i*(8))!=' ')cnt++;
 					}
-					history=history.substr(0,cnt*8) + dataformatting(8, to_string(student.getid()));
+					history=history.substr(0,cnt*(8)) + dataformatting(8, to_string(student.getid()));
 				}
 
 				history = dataformatting(40, history);
@@ -460,7 +511,7 @@ void borrow::clickinPanel()
 
 }
 
-void borrow::main1Panel(bookdocking& bd, userdocking& ud, userstatesdocking& usd)
+void borrow::main1Panel(bookdocking& bd, userdocking& ud, userstatesdocking& usd, deque<int>& dqID, deque<string>& dqNAME, deque<string>& dqISBN, deque<string>& dqTYPE, bool& dqflag)
 {
     int n;
 	while (islogin)
@@ -476,7 +527,7 @@ void borrow::main1Panel(bookdocking& bd, userdocking& ud, userstatesdocking& usd
 		case 1://查找
 			system("cls");
 			cout << "首页》》用户借阅系统主界面》》用户主页》》查找图书" << endl;
-			searchbookPanel(bd,usd); 
+			searchbookPanel(bd,usd,dqID,dqNAME,dqISBN,dqTYPE,dqflag); 
 			break;
 		case 2://个人信息
 			system("cls");
@@ -495,6 +546,27 @@ void borrow::main1Panel(bookdocking& bd, userdocking& ud, userstatesdocking& usd
 		}
 	}
 	system("cls");
+}
+
+void borrow::initdq(deque<int>& dqID, deque<string>& dqNAME, deque<string>& dqISBN, deque<string>& dqTYPE, bookdocking& bd,bool& dqflag)
+{
+	if (!dqflag) {
+		for (int i = 0; i < 9999; i++)
+		{
+			if (bd.bookexist(i))
+			{
+				dqID.push_back(i);
+				string value = bd.booksearch(i);
+				dqNAME.push_back(value.substr(6, 8));
+				dqISBN.push_back(value.substr(0, 6));
+				dqTYPE.push_back(value.substr(18, 4));
+			}
+		}
+		dqflag = true;
+	}
+
+	
+	
 }
 
 void borrow::returnPrevious()
@@ -644,11 +716,12 @@ int borrow::mainPanel(userdocking& ud)
 	return n;
 }
 
-void borrow::searchbookPanel(bookdocking& bd,userstatesdocking& usd)
+void borrow::searchbookPanel(bookdocking& bd,userstatesdocking& usd, deque<int>& dqID, deque<string>& dqNAME, deque<string>& dqISBN, deque<string>& dqTYPE, bool& dqflag)
 {
 	int m=-1;
 	book b;
 	string value;
+	string ttt;
 	while (m!=0)
 	{
 		m = -1;
@@ -704,14 +777,17 @@ void borrow::searchbookPanel(bookdocking& bd,userstatesdocking& usd)
 			}
 			break;
 		case 2:
-			ISBNsearchbook();
+			initdq(dqID,dqNAME,dqISBN,dqTYPE,bd,dqflag);
+			ISBNsearchbook(bd,usd,dqID,dqISBN);
 			break;
 		case 3:
-			namesearchbook();
+			initdq(dqID, dqNAME, dqISBN, dqTYPE, bd, dqflag);
+			namesearchbook(bd,usd,dqID,dqNAME);
 			break;
 		case 4:
-			typedisplay();
-			typeshowbook();
+			initdq(dqID, dqNAME, dqISBN, dqTYPE, bd, dqflag);
+			ttt=typedisplay(dqTYPE);
+			if(ttt!="NULL")typeshowbook(ttt,bd,usd,dqID,dqTYPE);
 			break;
 		case 0:
 			system("cls");
@@ -840,7 +916,7 @@ void borrow::bookborrowedPanel(bookdocking& bd,userstatesdocking& usd)
 		va = va.substr(0, 120);
 		for (int i = 0; i < 20; i++)
 		{
-			if (va.at(i * 6) != ' ')cnt++;
+			if (va.at(i * (6)) != ' ')cnt++;
 		}
 		int n;
 		for (int i = 0; i < cnt; i++)

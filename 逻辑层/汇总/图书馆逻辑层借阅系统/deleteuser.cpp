@@ -14,16 +14,19 @@
 void supervisor::deleteuser(userdocking& ud, userstatesdocking& usd) {
 	int id;
 	string bookid;
-	//string bklist;
-	//bklist = "";
-	//bklist = dataformatting(120, bklist);
+	string ID;
 	cout << "请输入待删除用户的ID：";
-	cin >> id;
+	cin >> ID;
+	while (ID.length() > 8 || atoi(ID.c_str()))//ID不能长度超过6或者包含字母或者单独为0
+	{
+		cout << "输入有误，请重新输入8位以内的数字:";
+		cin >> ID;
+	}
+	id = atoi(ID.c_str());
 	if (!ud.userexist(id))
 		cout << "该用户不存在！"<<endl;
 	else
 	{
-		//usd.uscreate(id, bklist);
 		bookid = usd.ussearch(id);//当前用户的借阅信息
 		bookid = bookid.substr(0, 120);
 		cout <<"该用户已借图书ID："<< bookid << endl;

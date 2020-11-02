@@ -11,6 +11,7 @@
 #include "time.h"
 #include <sstream>
 #include <tuple>
+#include <deque>
 using namespace std;
 
 
@@ -31,7 +32,7 @@ public:
 	void setID(int id);
 	void setPassWord(string password);
 
-	void main(bookdocking& bd, userdocking& ud, userstatesdocking& usd);//主控函数
+	void main(bookdocking& bd, userdocking& ud, userstatesdocking& usd, deque<int>& dqID, deque<string>& dqNAME, deque<string>& dqISBN, deque<string>& dqTYPE, bool& dqflag);//主控函数
 
 	bool qtlogin(int id, string password, userdocking& ud);//存好用户信息
 	bool qtborrowbook(int id,bookdocking& bd, userstatesdocking& usd);
@@ -48,19 +49,19 @@ public:
 	int mainPanel(userdocking& ud);
 
 
-	void searchbookPanel(bookdocking& bd, userstatesdocking& usd);
+	void searchbookPanel(bookdocking& bd, userstatesdocking& usd, deque<int>& dqID, deque<string>& dqNAME, deque<string>& dqISBN, deque<string>& dqTYPE,bool& dqflag);
 	void informationPanel(userdocking& ud);
 	void bookborrowedPanel(bookdocking& bd, userstatesdocking& usd);
 
-	void namesearchbook();
-	void ISBNsearchbook(); 
-	void typedisplay();
-	void typeshowbook();
+	void namesearchbook(bookdocking& bd, userstatesdocking& usd, deque<int>& dqID, deque<string>& dqNAME);
+	void ISBNsearchbook(bookdocking& bd, userstatesdocking& usd, deque<int>& dqID, deque<string>& dqISBN);
+	string typedisplay(deque<string>& dqTYPE);
+	void typeshowbook(string type,bookdocking& bd, userstatesdocking& usd, deque<int>& dqID, deque<string>& dqTYPE);
 	void nextpage();
 	void borrowbook(int id, bookdocking& bd, userstatesdocking& usd);
 	void clickinPanel();
-	void main1Panel(bookdocking& bd, userdocking& ud, userstatesdocking& usd);
-
+	void main1Panel(bookdocking& bd, userdocking& ud, userstatesdocking& usd,deque<int>& dqID, deque<string>& dqNAME, deque<string>& dqISBN, deque<string>& dqTYPE, bool& dqflag);
+	void initdq(deque<int>& dqID, deque<string>& dqNAME, deque<string>& dqISBN, deque<string>& dqTYPE,bookdocking& bd,bool& dqflag);
 
 	string dataformatting(int n, string data)
 	{

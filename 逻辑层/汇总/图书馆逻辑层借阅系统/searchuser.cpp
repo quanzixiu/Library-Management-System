@@ -11,8 +11,16 @@ void supervisor::searchuser(userdocking& ud) {
 	string password;
 	string email;
 	string value;
-	cout << "请输入要查找的用户ID:";
-	cin >> id;
+	string ID;
+	cout << "请输入待删除用户的ID：";
+	cin >> ID;
+	while (ID.length() > 8 || atoi(ID.c_str()))//ID不能长度超过6或者包含字母或者单独为0
+	{
+		cout << "输入有误，请重新输入8位以内的数字:";
+		cin >> ID;
+	}
+	id = atoi(ID.c_str());
+
 	if (ud.userexist(id)) //每次查询前要先判断
 	{
 		value = ud.usersearch(id);

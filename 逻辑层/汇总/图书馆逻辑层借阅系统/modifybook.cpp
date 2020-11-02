@@ -21,8 +21,15 @@ void supervisor::modifybook(bookdocking& bd) {
 	string op1;
 	int id;
 	string value;
+	string ID;
 	cout << "请输入待修改图书的ID：";
-	cin >> id;
+	cin >> ID;
+	while (ID.length() > 6 || atoi(ID.c_str()))//ID不能长度超过6或者包含字母或者单独为0
+	{
+		cout << "输入有误，请重新输入:";
+		cin >> ID;
+	}
+	id = atoi(ID.c_str());
 	if (!bd.bookexist(id)) cout << "该图书不存在！" << endl;
 	else {
 		//展示图书信息
@@ -61,8 +68,13 @@ void supervisor::modifybook(bookdocking& bd) {
 				break;
 			else if (op1 == "1") 
 			{
-				cout << "请输入ISBN:";
+				cout << "请输入图书的ISBN: ";
 				cin >> ISBN;
+				while (ISBN.length() > 6)
+				{
+					cout << "输入有误，请重新输入6位以内的ISBN：";
+					cin >> ISBN;
+				}
 				ISBN = dataformatting(6, ISBN);
 				if (bd.bookmodifyISBN(id, ISBN))
 				{
@@ -91,8 +103,13 @@ void supervisor::modifybook(bookdocking& bd) {
 			}
 			else if (op1 == "2")
 			{
-				cout << "请输入书名:";
+				cout << "请输入图书的书名: ";
 				cin >> name;
+				while (name.length() > 8)
+				{
+					cout << "输入有误，请重新输入8位以内的书名：";
+					cin >> name;
+				}
 				name = dataformatting(8, name);
 				if (bd.bookmodifyname(id, name))
 				{
@@ -121,8 +138,13 @@ void supervisor::modifybook(bookdocking& bd) {
 			}
 			else if (op1 == "3")
 			{
-				cout << "请输入作者:";
+				cout << "请输入图书的作者: ";
 				cin >> author;
+				while (author.length() > 4)
+				{
+					cout << "输入有误，请重新输入4位以内的作者名：";
+					cin >> author;
+				}
 				author = dataformatting(4, author);
 				if (bd.bookmodifyauthor(id, author))
 				{
@@ -151,8 +173,13 @@ void supervisor::modifybook(bookdocking& bd) {
 			}
 			else if (op1 == "4")
 			{
-				cout << "请输入分类:";
+				cout << "请输入图书的分类: ";
 				cin >> type;
+				while (type.length() > 4)
+				{
+					cout << "输入有误，请重新输入4位以内的分类名：";
+					cin >> type;
+				}
 				type = dataformatting(4, type);
 				if (bd.bookmodifytype(id, type))
 				{
@@ -183,6 +210,11 @@ void supervisor::modifybook(bookdocking& bd) {
 			{
 				cout << "请输入借书时间:";
 				cin >> borrowtime;
+				while (borrowtime.length() > 8)
+				{
+					cout << "输入有误，请重新输入8位以内的借书时间：";
+					cin >> borrowtime;
+				}
 				borrowtime = dataformatting(8, borrowtime);
 				if (bd.bookmodifyborrowtime(id, borrowtime))
 				{
@@ -213,6 +245,11 @@ void supervisor::modifybook(bookdocking& bd) {
 			{
 				cout << "请输入应还时间:";
 				cin >> returntime;
+				while (returntime.length() > 8)
+				{
+					cout << "输入有误，请重新输入8位以内的应还时间：";
+					cin >> returntime;
+				}
 				returntime = dataformatting(8, returntime);
 				if (bd.bookmodifyreturntime(id, returntime))
 				{
@@ -243,6 +280,11 @@ void supervisor::modifybook(bookdocking& bd) {
 			{
 				cout << "请输入是否在架:";
 				cin >> onsheelf;
+				while (onsheelf.length() > 1)
+				{
+					cout << "输入有误，请重新输入1或0：";
+					cin >> onsheelf;
+				}
 				//onsheelf = dataformatting(1, onsheelf);
 				if (bd.bookmodifyonsheelf(id, onsheelf))
 				{
@@ -273,6 +315,11 @@ void supervisor::modifybook(bookdocking& bd) {
 			{
 				cout << "请输入是否超期:";
 				cin >> isovertime;
+				while (isovertime.length() > 1)
+				{
+					cout << "输入有误，请重新输入1或0：";
+					cin >> isovertime;
+				}
 				isovertime = dataformatting(1, isovertime);
 				if (bd.bookmodifyisovertime(id, isovertime))
 				{

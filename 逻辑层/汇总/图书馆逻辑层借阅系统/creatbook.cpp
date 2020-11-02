@@ -18,15 +18,52 @@ void supervisor::createbook(bookdocking& bd) {
 	onsheelf = "1";
 	isovertime = "0";
 	string value;
+	string ID;
 
 	cout << "请入要增加的图书ID：" << endl;
-	cin >> id;
+	cin >> ID;
+	while (ID.length() > 6 || atoi(ID.c_str()))//ID不能长度超过6或者包含字母或者单独为0
+	{
+		cout << "输入有误，请重新输入:";
+		cin >> ID;
+	}
+	id = atoi(ID.c_str());
+
 	if (bd.bookexist(id)) {
 		cout << "该图书已经存在！" << endl;
 	}
 	else {
-		cout << "请依次输入图书的ISBN,书名,作者,分类: ";
-		cin >> ISBN >> name >> author >> type;
+		cout << "请输入图书的ISBN: ";
+		cin >> ISBN ;
+		while (ISBN.length() > 6)
+		{
+			cout << "输入有误，请重新输入6位以内的ISBN：";
+			cin >> ISBN;
+		}
+
+		cout << "请输入图书的书名: ";
+		cin >>  name ;
+		while (name.length() > 8)
+		{
+			cout << "输入有误，请重新输入8位以内的书名：";
+			cin >> name;
+		}
+
+		cout << "请输入图书的作者: ";
+		cin >>  author ;
+		while (author.length() > 8)
+		{
+			cout << "输入有误，请重新输入8位以内的作者名：";
+			cin >> author;
+		}
+
+		cout << "请输入图书的分类: ";
+		cin >>  type ;
+		while (type.length() > 8)
+		{
+			cout << "输入有误，请重新输入8位以内的分类：";
+			cin >> type;
+		}
 		//把输入的信息转换成规定的大小 
 		ISBN = dataformatting(6, ISBN);
 		name = dataformatting(8, name);

@@ -1,0 +1,4 @@
+﻿  borrow.cpp
+C:\Users\71031\source\repos\汇总\图书馆逻辑层借阅系统\borrow.cpp(370,22): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\71031\source\repos\汇总\图书馆逻辑层借阅系统\borrow.cpp(165): warning C4715: “borrow::qtborrowbook”: 不是所有的控件路径都返回值
+  图书馆逻辑层借阅系统.vcxproj -> C:\Users\71031\source\repos\汇总\x64\Debug\图书馆逻辑层借阅系统.exe

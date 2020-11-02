@@ -4,9 +4,10 @@
 #include<string>
 
 bool supervisor::slogin() {
-	int id;
+	string id;
 	string password;
-	int ID=000;
+	string ID;
+	ID = "0";
 	string Password;
 	Password = "admin";
 	cout << "请输入管理员ID：";

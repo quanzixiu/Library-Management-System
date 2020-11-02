@@ -18,15 +18,61 @@ void supervisor::createuser(userdocking& ud) {
 	string major;
 	string password;
 	string email;
+	string ID;
 
+	//输入检查
 	cout << "请输入要增加的用户ID:";
-	cin >> id;
+	cin >> ID;
+	while (ID.length() > 8 || atoi(ID.c_str()))//ID不能长度超过6或者包含字母或者单独为0
+	{
+		cout << "输入有误，请重新输入:";
+		cin >> ID;
+	}
+	id = atoi(ID.c_str());
+
 	if (ud.userexist(id))
 		cout << "该用户ID已经存在！"<<endl;
 	else
 	{
-		cout << "请输入要增加的用户姓名 大学 专业 密码 邮箱:";
-		cin >> name >> college >> major >> password >> email;
+		cout << "请输入要增加的用户姓名: ";
+		cin >> name;
+		while (name.length() > 8)
+		{
+			cout << "输入有误，请重新输入8位以内的用户姓名：";
+			cin >> name;
+		}
+
+		cout << "请输入要增加的用户学校: ";
+		cin >> college;
+		while (college.length() > 4)
+		{
+			cout << "输入有误，请重新输入4位以内的用户学校：";
+			cin >> college;
+		}
+
+		cout << "请输入要增加的用户专业: ";
+		cin >> major;
+		while (major.length() > 4)
+		{
+			cout << "输入有误，请重新输入4位以内的用户专业：";
+			cin >> major;
+		}
+
+		cout << "请输入要增加的用户密码: ";
+		cin >> password;
+		while (password.length() > 16)
+		{
+			cout << "输入有误，请重新输入16位以内的用户密码：";
+			cin >> password;
+		}
+
+		cout << "请输入要增加的用户邮箱: ";
+		cin >> email;
+		while (email.length() > 24)
+		{
+			cout << "输入有误，请重新输入24位以内的用户邮箱：";
+			cin >> email;
+		}
 
 		//把输入的信息转换成规定的大小 
 		name = dataformatting(8, name);

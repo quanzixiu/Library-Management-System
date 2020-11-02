@@ -2,8 +2,14 @@
 #include "borrow.h"
 #include "supervisor.h"
 #include "returnbook.h"
+#include <deque>
 int main()
 {
+	bool dqflag = false;
+	deque<int> dqID;
+	deque<string> dqNAME;
+	deque<string> dqISBN;
+	deque<string> dqTYPE;
 	supervisor s;
 	returnbook r;
 	bookdocking bd;
@@ -31,7 +37,7 @@ int main()
 	{
 		bd.bookadd(i + 1, br.dataformatting(6, to_string(i + 1)), br.dataformatting(8, to_string(i + 1)), br.dataformatting(4, to_string(i + 1)), br.dataformatting(4, to_string(i + 1)), br.dataformatting(8, "00000000"), br.dataformatting(8, "00000000"), br.dataformatting(40, " "), br.dataformatting(1, to_string(1)), br.dataformatting(1, to_string(0)));
 	}*/
-	
+
 	int n = 0;
 	while (n!=-1)
 	{
@@ -47,7 +53,7 @@ int main()
 		{
 		case 1:
 			system("cls");
-			br.main(bd, ud, usd);
+			br.main(bd, ud, usd,dqID,dqNAME,dqISBN,dqTYPE,dqflag);
 			system("cls");
 			break;
 		case 2:
