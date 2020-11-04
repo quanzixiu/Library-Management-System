@@ -1,0 +1,329 @@
+#include "bookdocking.h"
+
+bookdocking::bookdocking(){
+	Empty.open("valEmpty.txt", ios::in | ios::out | ios::binary);
+	secData.open("secIndex.txt", ios::in | ios::out | ios::binary);
+	if (!secData) {
+		Empty.close();
+		secData.close();
+		ofstream uEmpty("valEmpty.txt", ios::binary);
+		ofstream pData("secIndex.txt", ios::binary);
+		uEmpty.close();
+		pData.close();
+		Empty.open("valEmpty.txt", ios::in | ios::out | ios::binary);
+		secData.open("secIndex.txt", ios::in | ios::out | ios::binary);
+	}
+	blank_str = string(LENGTH_ID + LENGTH_VALUE, ' ');
+	firstEmpty = 0;//firstEmpty shows the first empty destination to store new datas when new data is inputed
+	zero_str = "0000";//zero_str is a string to rewrite the address in fEmpty to change the isEmpty information
+}
+
+bookdocking::~bookdocking() {
+	Empty.close();
+	secData.close();
+}
+
+
+bool bookdocking::bookadd(int id,string ISBN, string name, string author, string type, string borrowtime, string returntime, string histroy, string onsheelf, string isovertime)
+{	
+	Empty.clear();
+	secData.clear();
+	to_id = to_string(id);
+	value = ISBN + name + author + type + borrowtime + returntime + histroy + onsheelf + isovertime;
+	to_value = value;
+	if (database.insert(id, value)) {
+		
+		//Empty.open("valEmpty.txt", ios::in | ios::out | ios::binary); //open the file that indicates the empty place in the datafile fIndex
+		
+		if (Empty.peek() != EOF) {//check if the fEmpty file is not an empty one. if so, execute the following codes.
+			//secData.open("secIndex.txt", ios::in | ios::out | ios::binary);//open the file fIndex to add items
+			Empty.seekg(0, ios::beg);//go to the head of the fEmpty
+			getline(Empty, v_index);//read a line (serves as an address (4 bytes data per line), indicates an empty in fIndex
+			while (!atoi(v_index.c_str())) {	//find the first non-zero destination of fEmpty
+				firstEmpty = Empty.tellg();//store the present destination that the file pointer fEmpty points, in file fEmpty(read)
+				getline(Empty, v_index);//id not non-zero, read a new data (in a new line)
+			}
+			Empty.clear();
+			secData.seekp(atoi(v_index.c_str()), ios::beg);//move the pointer fIndex to the empty destination
+			//fEmpty.read(c_to_str.c_str(), 4);
+			secData.write(to_id.c_str(), LENGTH_ID);//write the id data (within 8(?) bytes) into the fIndex
+			secData.write(to_value.c_str(), LENGTH_VALUE);//write the value data (within 80 bytes) into the fIndex, whithout any blanks between id data
+			secData.write("\n", sizeof(char));//start a new line in fIndex for another new datas
+			secData.clear();
+			Empty.seekp(firstEmpty, ios::beg);//go to the empty place indicated in fEmpty
+			Empty.write(zero_str.c_str(), LENGTH_INDEXADDRESS);//change the address data to 0000(if trans to int, is 0)
+			//Empty.clear();
+		}
+		else {//if the fEmpty is empty, execute the following codes
+			//secData.open("secIndex.txt", ios::in | ios::out | ios::binary | ios::app);//no free spaces to write on, so start a new line at the rear of the file
+			Empty.clear();
+			secData.seekp(0, ios::end);//no free spaces to write on, so start a new line at the rear of the file
+			secData.write(to_id.c_str(), LENGTH_ID);//write id data
+			secData.write(to_value.c_str(), LENGTH_VALUE);//write value data
+			secData.write("\n", sizeof(char));//start a new line in fIndex for another new datas
+			//no changes in fEmpty, so no need to change it.
+			//fEmpty.write();
+		}
+		/*secData.clear();
+		secData.close();
+		Empty.clear();
+		Empty.close();
+		*/return true;
+	}
+	else
+		return false;
+
+}
+
+
+
+
+
+
+bool bookdocking::bookdelete(int id) {
+	string temp;
+	Empty.clear();
+	secData.clear();
+	if (database.remove(id)) {
+		//Empty.open("valEmpty.txt", ios::in | ios::out | ios::binary);
+		//secData.open("secIndex.txt", ios::in | ios::out | ios::binary);
+		line_num = search_delete(id);// get the correct destination the fIndex stores that line of data (return the address of it.)
+		
+		/*
+		v_index = to_string(line_num);//transform the line_num(int) to string
+		for (int i = 1; i < line_num; i++) getline(secData, temp);
+		p_index = secData.tellg();
+		secData.clear();
+		secData.seekp(p_index, ios::beg);
+		//[warning: line_num is the num of line, not the true address!]fIndex.seekp(line_num/*address*//*, ios::beg);//move the pointer of fIndex to the place of address
+		/*secData.write(blank_str.c_str(), LENGTH_ID + LENGTH_VALUE);//replace the datas with a blank string (88 bytes, a line).
+		secData.clear();
+		*/
+
+
+		//Empty.clear();
+		/*if (Empty.peek() == EOF) {//if fEmpty is empty
+			Empty.clear();
+			Empty.seekp(0, ios::beg);
+			Empty.write(v_index.c_str(), LENGTH_INDEXADDRESS);//write the position data into the fEmpty
+			// not [fEmpty.write(new_str.c_str(), LENGTH_INDEXADDRESS);]!!!!
+			Empty.clear();
+		}*/
+/*		else {//fEmpty is not empty
+			/*
+			fEmpty.seekp(0, ios::beg);
+			getline(fEmpty, new_str);
+			while (atoi(new_str.c_str()) != line_num) {
+				firstEmpty = fEmpty.tellg();
+				getline(fEmpty, new_str);
+				}
+			fEmpty.seekp(firstEmpty, ios::beg);
+			fEmpty.write(zero_str.c_str(),LENGTH_INDEXADDRESS);
+			*/
+/*			Empty.seekg(0, ios::beg);
+			getline(Empty, new_str);
+			while (atoi(new_str.c_str()))//while new_str receives not "0000" (0 in int), keep traversing for the next line,
+			//until find a "0000" to rewrite into.
+			{
+				firstEmpty = Empty.tellg();
+				getline(Empty, new_str);
+			}
+			Empty.clear();
+			Empty.seekp(firstEmpty, ios::beg); //move the pointer to the empty(0000) place
+			Empty.write(v_index.c_str(), LENGTH_INDEXADDRESS);//write the position data into the fEmpty
+			Empty.clear();
+		}*/
+		/*Empty.clear();
+		Empty.close();
+		secData.clear();
+		secData.close();
+		*/return true;
+	}
+	else
+		return false;
+}
+int bookdocking::search_delete(int id) {// get the correct destination the fIndex stores that line of data (return the address of it.)
+	int red = 0, ret = 0;//red is the receiver of the data, ret to return the num of line the data lies on
+	string rec, recc;//rec to receive data, recc to save a part of rec
+	Empty.clear();
+	secData.clear();
+	//secData.open("secIndex.txt", ios::in | ios::out | ios::binary);//opens fIndex directly, ignore the fIndex opened outside the func domain
+	if (secData.peek() == EOF) return ret;
+	p_index = secData.tellg();//must find replacing position before read-pointer moved
+	getline(secData, rec);//get a line in fIndex, save the data in rec
+	recc = rec.substr(0, LENGTH_ID);//cut the rec, remaining the ID data only
+	red = atoi(recc.c_str());//trans into integer
+	ret += 1;
+	while (red != id) {//if not equal, re-get a new data from next line in fIndex
+		if (secData.peek() == EOF) break;
+		p_index = secData.tellg();//must find new replacing position before read-pointer moved
+		getline(secData, rec);
+		recc = rec.substr(0, LENGTH_ID);
+		red = atoi(recc.c_str());
+		ret += 1;
+	}
+	//secData.close();
+	if (red != id) {
+		secData.clear();
+		return ret;
+	}
+	else {
+		secData.clear();
+		secData.seekp(p_index, ios::beg);
+		secData.write(blank_str.c_str(), LENGTH_ID + LENGTH_VALUE);//replace the datas with a blank string (88 bytes, a line).
+		secData.clear();
+		if (Empty.peek() == EOF) {//if fEmpty is empty
+			Empty.clear();
+			Empty.seekp(0, ios::beg);
+			v_index = to_string(p_index);//trans p_index to v_index
+			Empty.write(v_index.c_str(), LENGTH_INDEXADDRESS);//write the position data into the fEmpty
+			// not [fEmpty.write(new_str.c_str(), LENGTH_INDEXADDRESS);]!!!!
+			Empty.clear();
+		}
+		else {//fEmpty is not empty
+			/*
+			fEmpty.seekp(0, ios::beg);
+			getline(fEmpty, new_str);
+			while (atoi(new_str.c_str()) != line_num) {
+				firstEmpty = fEmpty.tellg();
+				getline(fEmpty, new_str);
+				}
+			fEmpty.seekp(firstEmpty, ios::beg);
+			fEmpty.write(zero_str.c_str(),LENGTH_INDEXADDRESS);
+			*/
+			Empty.seekg(0, ios::beg);
+			getline(Empty, new_str);
+			while (atoi(new_str.c_str())) {//while new_str receives not "0000" (0 in int), keep traversing for the next line,
+				//until find a "0000" to rewrite into.
+				//also, use new_str != "0000" to check.
+				firstEmpty = Empty.tellg();
+				getline(Empty, new_str);
+			}
+			Empty.clear();
+			Empty.seekp(firstEmpty, ios::beg); //move the pointer to the empty(0000) place
+			Empty.write(v_index.c_str(), LENGTH_INDEXADDRESS);//write the position data into the fEmpty
+			Empty.clear();
+		}
+		return ret - 1;
+	}
+		
+}
+
+string bookdocking::booksearch(int id) {
+	if (database.select(id, value))
+		return value;
+	else return false;
+}
+
+bool bookdocking::bookexist(int id) {
+	if (database.select(id, value))
+		return true;
+	else
+		return false;
+}
+bool bookdocking::bookmodifyISBN(int id, string ISBN) {
+	if (database.select(id, value)) {
+		value.replace(0, 6, ISBN);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyname(int id, string name) {
+	if (database.select(id, value)){
+		value.replace(6, 8, name);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyauthor(int id, string author) {
+	if (database.select(id, value)){
+		value.replace(14, 4, author);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifytype(int id, string type) {
+	if (database.select(id, value)){
+		value.replace(18, 4, type);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyborrowtime(int id, string borrowtime) {
+	if (database.select(id, value)){
+		value.replace(22, 8, borrowtime);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyreturntime(int id, string returntime) {
+	if (database.select(id, value)){
+		value.replace(30, 8, returntime);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyhistory(int id, string history) {
+	if (database.select(id, value)){
+		value.replace(38, 40, history);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+bool bookdocking::bookmodifyonsheelf(int id, string onsheelf) {
+	if (database.select(id, value)){
+		value.replace(78, 1, onsheelf);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}bool bookdocking::bookmodifyisovertime(int id, string isovertime) {
+	if (database.select(id, value)){
+		value.replace(79, 1, isovertime);
+		if (database.update(id, value))
+			return true;
+		else
+			return false;
+	}
+	else
+		return false;
+}
+
+//�ֶ����û�дﵽ�涨��С�� ������ĵط����ո�
+string dataformatting(int n, string data)
+{
+	data.append(n - data.size(), ' ');
+	return data;
+}
+
