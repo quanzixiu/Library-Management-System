@@ -10,7 +10,7 @@
 #define START_NAME 6
 #define START_AUTHOR 14
 #define START_TYPE 18
-#define LENGTH_ID 8
+#define LENGTH_ID 6
 #define LENGTH_ISBN 6
 #define LENGTH_NAME 8
 #define LENGTH_AUTHOR 4
