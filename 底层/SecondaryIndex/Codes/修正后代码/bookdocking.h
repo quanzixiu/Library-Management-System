@@ -56,8 +56,5 @@ private:
 	fstream secData, Empty;
 };
 
-/*以下工具函数供你们使用*/
-
-string dataformatting(int n, string data);////字段如果没有达到规定大小则 将空余的地方填充空格 
 
 

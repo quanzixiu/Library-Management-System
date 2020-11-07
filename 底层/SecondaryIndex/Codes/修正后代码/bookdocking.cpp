@@ -428,10 +428,4 @@ bool bookdocking::bookmodifyonsheelf(int id, string onsheelf) {
 		return false;
 }
 
-//�ֶ����û�дﵽ�涨��С�� ������ĵط����ո�
-string dataformatting(int n, string data)
-{
-	data.append(n - data.size(), ' ');
-	return data;
-}
 
